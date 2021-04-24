@@ -1,0 +1,38 @@
+<!DOCTYPEhtml>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>RTCG-WP-05P</title>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">$(document).ready(function () {
+    console.log("Document bereit!");
+});</script>
+<body>
+<input type="file" id="myFile" name="filename">
+<button onclick="fft()">PLAY</button>
+<button onclick="pause()">PAUSE</button>
+<button onclick="addCube()">NEUES DING</button>
+<audio id="source"></audio>
+<script src="JS/three.js"></script>
+<script src="JS/fft.js"></script>
+<script src="JS/main.js"></script>
+<script>
+
+</script>
+</body>
+</html>
