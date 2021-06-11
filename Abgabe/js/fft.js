@@ -11,6 +11,7 @@ var canvas,
     audio;
 
 
+
 function fft() {
 
     let songs = ["audio/24 - Sail - Awolnation.mp3", "audio/Demons - Imagine Dragons.mp3", "audio/Never gonna give you up.mp3"];
