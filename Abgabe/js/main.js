@@ -5,7 +5,7 @@ let controller;
 let loader; // Wir müssen eine Variable für einen gltf-Modell-Loader erstellen
 let meshes = [];
 let counter = 0;
-let color = 0xFFFFFF;
+let color = 0x00000;
 let flag = 1;
 init();
 animate();
