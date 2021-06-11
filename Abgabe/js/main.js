@@ -68,7 +68,7 @@ function init() {
     line.material.opacity = 0.25;
     line.material.transparent = false;
 
-    line.position.z = -0.25;
+    line.position.z = -3;
     meshes.push(line);
     scene.add(line);
 
@@ -110,7 +110,7 @@ function render() {
         //scale(i);
 
         //meshes[i].position.y = -4 +i;
-        meshes[i].position.x += 0.001;
+        //meshes[i].position.x += 0.001;
         //meshes[i].position.y += getRandomArbitrary(-2, 2) * Math.sin(counter) / (color / 1000)
         //meshes[i].position.z += getRandomArbitrary(-2, 2) * Math.sin(counter) / (color / 1000)
 
@@ -134,9 +134,9 @@ function getRandomArbitrary(min, max) {
 
 function rotate(i) {
     let randRot = getRandomArbitrary(1, 10) / 100;
-    let x = color % randRot * color / 1000;
-    let y = color % randRot * color / 1000;
-    let z = color % randRot * color / 1000;
+    let x = color % randRot * color ;
+    let y = color % randRot * color ;
+    let z = color % randRot * color ;
 
     meshes[i].rotation.x += x;
     meshes[i].rotation.y += y;
