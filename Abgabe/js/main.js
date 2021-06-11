@@ -88,6 +88,10 @@ function onWindowResize() {
 
 function animate() {
     renderer.setAnimationLoop(render);
+}
+
+function render() {
+    renderer.render(scene, camera);
     //fbc_array = new Uint8Array(analyser.frequencyBinCount);
     //bar_count = window.innerWidth / 2;
 
@@ -116,11 +120,9 @@ function animate() {
              //x.fillRect(bar_pos, canvas.height, bar_width, bar_height);
          }*/
     }
+    counter += 0.02;
+    console.log(counter)
 
-}
-
-function render() {
-    renderer.render(scene, camera);
 }
 
 function getRandomArbitrary(min, max) {
