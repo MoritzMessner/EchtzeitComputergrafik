@@ -26,6 +26,7 @@
     let camera, scene, renderer;
     let controller;
     let loader; // Wir müssen eine Variable für einen gltf-Modell-Loader erstellen
+    let meshes = [];
 
     init();
     animate();
@@ -67,6 +68,7 @@
             function (gltf) {
                 // Die gltf.scene enthält die Objektgruppe Three.js, die das 3D-Objekt des Modells darstellt.
                 scene.add(gltf.scene);
+                meshes.push(gltf.scene);
                 console.log("Modell wurde der Szene hinzugefügt!");
 
                 gltf.scene.position.z = -0.25;
@@ -91,6 +93,7 @@
 
     function animate() {
         renderer.setAnimationLoop(render);
+        meshes[0].scale.x += 1;
     }
 
     function render() {
