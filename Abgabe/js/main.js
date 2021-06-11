@@ -144,6 +144,17 @@ function rotate(i) {
 
 }
 
+
+function randomColor(color, obj) {
+    let r = ((Math.floor(Math.random() * 255) * color) % 255) / 255;
+    let g = (Math.floor(Math.random() * 255) * color) % 255 / 255;
+    let b = (Math.floor(Math.random() * 255) * color) % 255 / 255;
+    obj.material.color.setRGB(r, g, b)
+
+    // todo change color according to color in use
+    //let color4 = new THREE.Color("rgb(100%, 0%, 0%)");
+}
+
 function scale(i) {
     let randScale = (color / 900000) * Math.random(); //getRandomArbitrary(-color / 200000, color / 200000) / 20;
     meshes[i].scale.x = randScale;
