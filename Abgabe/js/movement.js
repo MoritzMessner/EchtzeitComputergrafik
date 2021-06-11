@@ -1,21 +1,3 @@
-function addMesh() {
-    var geometry_sphere = new THREE.SphereGeometry(2, 10, 15);
-    var material_sphere = new THREE.MeshBasicMaterial({color: 0x0011ff});
-    var sphere = new THREE.Mesh(geometry_sphere, wireframe);
-
-    var wireframe = new THREE.WireframeGeometry(geometry_sphere)
-
-
-    var line = new THREE.LineSegments(wireframe);
-    line.material.depthTest = false;
-    line.material.opacity = 0.25;
-    line.material.transparent = false;
-
-    line.position.z = -6;
-    line.material.color.setRGB(0, 0, 0)
-    meshes.push(line);
-    scene.add(line);
-}
 
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
@@ -37,7 +19,15 @@ function rotate(i) {
 
 }
 
+function randomColor(color, obj) {
+    let r = ((Math.floor(Math.random() * 255) * color) % 255) / 255;
+    let g = (Math.floor(Math.random() * 255) * color) % 255 / 255;
+    let b = (Math.floor(Math.random() * 255) * color) % 255 / 255;
+    obj.material.color.setRGB(r, g, b)
 
+    // todo change color according to color in use
+    //let color4 = new THREE.Color("rgb(100%, 0%, 0%)");
+}
 function randomColor(color, obj) {
     let r = ((Math.floor(Math.random() * 255) * color) % 255) / 255;
     let g = (Math.floor(Math.random() * 255) * color) % 255 / 255;

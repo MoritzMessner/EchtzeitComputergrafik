@@ -36,12 +36,8 @@ function fft() {
     source.connect(analyser);
     source.connect(context.destination);
 
-    //animate();
     audio.play();
-}
-
-function getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
+    //animate();
 }
 
 

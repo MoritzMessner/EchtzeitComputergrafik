@@ -15,15 +15,27 @@
 
 
 <script >
-    let meshes = [];
-    let camera, scene, renderer;
-    let controller;
+    var meshes = [];
+    var camera, scene, renderer;
+    var controller;
+    var canvas,
+        ctx,
+        source,
+        context,
+        analyser,
+        fbc_array,
+        bar_count,
+        bar_pos,
+        bar_width,
+        bar_height,
+        audio;
 
 </script>
 <button onclick="fft()">PLAY</button>
 <button onclick="pause()">PAUSE</button>
 <button onclick="addMesh()">NEUES DING</button>
 <audio id="source"></audio>
+<script  src="js/geometry.js"></script>
 <script src="js/fft.js"></script>
 <script type="module" src="js/main.js"></script>
 <script src="js/movement.js"></script>

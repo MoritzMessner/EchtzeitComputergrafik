@@ -84,14 +84,14 @@ function render() {
     //bar_count = window.innerWidth / 2;
 
     //analyser.getByteFrequencyData(fbc_array);
-    /*color = fbc_array.reduce(function (accumVariable, curValue) {
-        return accumVariable + curValue
-    }, 0);*/
-    color = getRandomArbitrary(-10, 10);
+    //color = fbc_array.reduce(function (accumVariable, curValue) {
+    //    return accumVariable + curValue
+    //}, 0);
+    color = getRandomArbitrary(-50, 100);
     for (var i = 0; i < meshes.length; i++) {
 
         // manipulate mesh
-        //randomColor(color, meshes[i])
+        randomColor(color, meshes[i])
         rotate(i);
         scale(i);
 
