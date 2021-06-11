@@ -69,7 +69,6 @@ function init() {
     line.material.transparent = false;
 
     line.position.z = -0.25;
-
     meshes.push(line);
     scene.add(line);
 
@@ -95,6 +94,37 @@ function animate() {
 
 function render() {
     renderer.render(scene, camera);
+    //fbc_array = new Uint8Array(analyser.frequencyBinCount);
+    //bar_count = window.innerWidth / 2;
+
+    //analyser.getByteFrequencyData(fbc_array);
+    /*color = fbc_array.reduce(function (accumVariable, curValue) {
+        return accumVariable + curValue
+    }, 0);*/
+    color = getRandomArbitrary(-10, 10);
+    for (var i = 0; i < meshes.length; i++) {
+
+        // manipulate mesh
+        randomColor(color, meshes[i])
+        rotate(i);
+        scale(i);
+
+        //meshes[i].position.y = -4 +i;
+        meshes[i].position.x += 0.001;
+        //meshes[i].position.y += getRandomArbitrary(-2, 2) * Math.sin(counter) / (color / 1000)
+        //meshes[i].position.z += getRandomArbitrary(-2, 2) * Math.sin(counter) / (color / 1000)
+
+        /* for (var i = 0; i < bar_count; i++) {
+             bar_pos = i * 4;
+             bar_width = 2;
+             bar_height = -(fbc_array[i] / 2);
+
+             //x.fillRect(bar_pos, canvas.height, bar_width, bar_height);
+         }*/
+    }
+    counter += 0.02;
+    console.log(counter)
+
 }
 
 function getRandomArbitrary(min, max) {
