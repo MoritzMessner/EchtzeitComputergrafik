@@ -69,6 +69,7 @@ function init() {
     line.material.transparent = false;
 
     line.position.z = -3;
+    line.material.color.setRGB(0, 0, 0)
     meshes.push(line);
     scene.add(line);
 
