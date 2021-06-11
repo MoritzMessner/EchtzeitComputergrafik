@@ -93,10 +93,11 @@
 
     function animate() {
         renderer.setAnimationLoop(render);
-        meshes[0].scale.x += 1;
+
     }
 
     function render() {
+        meshes[0].scale.x += 1;
         renderer.render(scene, camera);
     }
 
