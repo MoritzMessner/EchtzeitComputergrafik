@@ -13,12 +13,7 @@
 </head>
 
 <body>
-<button onclick="fft()">PLAY</button>
-<button onclick="pause()">PAUSE</button>
-<button onclick="addCube()">NEUES DING</button>
-<audio id="source"></audio>
 
-<script src="js/fft.js"></script>
 
 <script type="module">
     import {ARButton} from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
@@ -53,27 +48,43 @@
         controller.addEventListener('select', onSelect);
         scene.add(controller);
 
-        // URL zum jeweiligen Objekt
-        const modelUrl = "./model/Snickers.glb";
+        /*   // URL zum jeweiligen Objekt
+           const modelUrl = "./model/Snickers.glb";
 
-        // Erstellung  GLTF-Ladeobjekt. GLTF ist ein 3D-Modellformat, das üblicherweise als das "JPEG von 3D" bezeichnet wird, weil es schnell und effizient zu verwenden ist, was ideal für das Web ist
-        loader = new THREE.GLTFLoader();
+           // Erstellung  GLTF-Ladeobjekt. GLTF ist ein 3D-Modellformat, das üblicherweise als das "JPEG von 3D" bezeichnet wird, weil es schnell und effizient zu verwenden ist, was ideal für das Web ist
+           loader = new THREE.GLTFLoader();
 
-        // Laden des Modells
-        // loader takes in a few arguments loader(model url, onLoad callback, onProgress callback, onError callback)
-        loader.load(
-            // URL
-            modelUrl,
-            // onLoad callback: Was aufgerufen wird, sobald das vollständige Modell geladen ist.
-            function (gltf) {
-                // Die gltf.scene enthält die Objektgruppe Three.js, die das 3D-Objekt des Modells darstellt.
-                scene.add(gltf.scene);
-                meshes.push(gltf.scene);
-                console.log("Modell wurde der Szene hinzugefügt!");
+           // Laden des Modells
+           // loader takes in a few arguments loader(model url, onLoad callback, onProgress callback, onError callback)
+           loader.load(
+               // URL
+               modelUrl,
+               // onLoad callback: Was aufgerufen wird, sobald das vollständige Modell geladen ist.
+               function (gltf) {
+                   // Die gltf.scene enthält die Objektgruppe Three.js, die das 3D-Objekt des Modells darstellt.
+                   scene.add(gltf.scene);
+                   meshes.push(gltf.scene);
+                   console.log("Modell wurde der Szene hinzugefügt!");
 
-                gltf.scene.position.z = -0.25;
-            },
-        );
+                   gltf.scene.position.z = -0.25;
+               },
+           );
+
+         */
+
+        var geometry_sphere = new THREE.SphereGeometry(2, 10, 15);
+        var material_sphere = new THREE.MeshBasicMaterial({color: 0x0011ff});
+        var sphere = new THREE.Mesh(geometry_sphere, wireframe);
+
+        var wireframe = new THREE.WireframeGeometry(geometry_sphere)
+
+
+        var line = new THREE.LineSegments(wireframe);
+        line.material.depthTest = false;
+        line.material.opacity = 0.25;
+        line.material.transparent = false;
+
+        scene.add(line);
 
         document.body.appendChild(ARButton.createButton(renderer));
 
@@ -97,11 +108,20 @@
     }
 
     function render() {
-        meshes[0].scale.x += 1;
+        //meshes[0].scale.x += 1;
         renderer.render(scene, camera);
+    }
+    function getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
     }
 
 </script>
+<button onclick="fft()">PLAY</button>
+<button onclick="pause()">PAUSE</button>
+<button onclick="addCube()">NEUES DING</button>
+<audio id="source"></audio>
+
+<script src="js/fft.js"></script>
 </body>
 
 </html>
