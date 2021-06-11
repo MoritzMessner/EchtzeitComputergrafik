@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="author" content="WPM - Echtzeit Computergrafik">
-    <link type="html/css" rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
 </head>
@@ -14,16 +14,19 @@
 <body>
 
 
-<script type="module">
-
+<script >
+    let meshes = [];
+    let camera, scene, renderer;
+    let controller;
 
 </script>
 <button onclick="fft()">PLAY</button>
 <button onclick="pause()">PAUSE</button>
-<button onclick="addCube()">NEUES DING</button>
+<button onclick="addMesh()">NEUES DING</button>
 <audio id="source"></audio>
 <script src="js/fft.js"></script>
 <script type="module" src="js/main.js"></script>
+<script src="js/movement.js"></script>
 
 
 </body>
