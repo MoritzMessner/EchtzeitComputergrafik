@@ -105,9 +105,9 @@ function render() {
     for (var i = 0; i < meshes.length; i++) {
 
         // manipulate mesh
-        randomColor(color, meshes[i])
+        //randomColor(color, meshes[i])
         rotate(i);
-        scale(i);
+        //scale(i);
 
         //meshes[i].position.y = -4 +i;
         meshes[i].position.x += 0.001;
