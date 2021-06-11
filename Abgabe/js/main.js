@@ -4,7 +4,9 @@ let camera, scene, renderer;
 let controller;
 let loader; // Wir müssen eine Variable für einen gltf-Modell-Loader erstellen
 let meshes = [];
-
+let counter = 0;
+let color = 0xFFFFFF;
+let flag = 1;
 init();
 animate();
 
@@ -93,7 +95,7 @@ function animate() {
     /*color = fbc_array.reduce(function (accumVariable, curValue) {
         return accumVariable + curValue
     }, 0);*/
-    let color  = getRandomArbitrary(-10,10);
+    color  = getRandomArbitrary(-10,10);
     for (var i = 0; i < meshes.length; i++) {
 
         // manipulate mesh
