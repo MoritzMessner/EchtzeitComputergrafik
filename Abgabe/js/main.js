@@ -68,6 +68,8 @@ function init() {
     line.material.opacity = 0.25;
     line.material.transparent = false;
 
+    line.position.z = -0.25;
+
     scene.add(line);
 
     document.body.appendChild(ARButton.createButton(renderer));
@@ -99,7 +101,7 @@ function render() {
     /*color = fbc_array.reduce(function (accumVariable, curValue) {
         return accumVariable + curValue
     }, 0);*/
-    color  = getRandomArbitrary(-10,10);
+    color = getRandomArbitrary(-10, 10);
     for (var i = 0; i < meshes.length; i++) {
 
         // manipulate mesh
@@ -108,9 +110,9 @@ function render() {
         scale(i);
 
         //meshes[i].position.y = -4 +i;
-        meshes[i].position.x += getRandomArbitrary(-2, 2) * Math.sin(counter) / (color / 1000)
-        meshes[i].position.y += getRandomArbitrary(-2, 2) * Math.sin(counter) / (color / 1000)
-        meshes[i].position.z += getRandomArbitrary(-2, 2) * Math.sin(counter) / (color / 1000)
+        meshes[i].position.x += 0.001;
+        //meshes[i].position.y += getRandomArbitrary(-2, 2) * Math.sin(counter) / (color / 1000)
+        //meshes[i].position.z += getRandomArbitrary(-2, 2) * Math.sin(counter) / (color / 1000)
 
         /* for (var i = 0; i < bar_count; i++) {
              bar_pos = i * 4;
