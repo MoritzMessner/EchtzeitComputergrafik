@@ -6,8 +6,10 @@ let loader; // Wir müssen eine Variable für einen gltf-Modell-Loader erstellen
 let counter = 0;
 let color = 0x00000;
 let flag = 1;
+var ball;
 init();
 animate();
+fft()
 
 function init() {
     const container = document.createElement('div');
@@ -30,6 +32,7 @@ function init() {
     controller = renderer.xr.getController(0);
     controller.addEventListener('select', onSelect);
     scene.add(controller);
+    ball = addMesh();
 
     /*   // URL zum jeweiligen Objekt
        const modelUrl = "./model/Snickers.glb";
@@ -62,7 +65,6 @@ function init() {
 }
 
 
-
 function onSelect() {
     //Todo
 }
@@ -79,36 +81,37 @@ function animate() {
 }
 
 function render() {
-    renderer.render(scene, camera);
-    //fbc_array = new Uint8Array(analyser.frequencyBinCount);
-    //bar_count = window.innerWidth / 2;
 
-    //analyser.getByteFrequencyData(fbc_array);
-    //color = fbc_array.reduce(function (accumVariable, curValue) {
-    //    return accumVariable + curValue
-    //}, 0);
-    color = getRandomArbitrary(-50, 100);
-    for (var i = 0; i < meshes.length; i++) {
+    analyser.getByteFrequencyData(dataArray);
+    var lowerHalfArray = dataArray.slice(0, (dataArray.length / 2) - 1);
+    var upperHalfArray = dataArray.slice((dataArray.length / 2) - 1, dataArray.length - 1);
 
-        // manipulate mesh
-        randomColor(color, meshes[i])
-        rotate(i);
-        scale(i);
+    var overallAvg = avg(dataArray);
+    var lowerMax = max(lowerHalfArray);
+    var lowerAvg = avg(lowerHalfArray);
+    var upperMax = max(upperHalfArray);
+    var upperAvg = avg(upperHalfArray);
 
-        //meshes[i].position.y = -4 +i;
-        //meshes[i].position.x += 0.001;
-        //meshes[i].position.y += getRandomArbitrary(-2, 2) * Math.sin(counter) / (color / 1000)
-        //meshes[i].position.z += getRandomArbitrary(-2, 2) * Math.sin(counter) / (color / 1000)
+    var lowerMaxFr = lowerMax / lowerHalfArray.length;
+    var lowerAvgFr = lowerAvg / lowerHalfArray.length;
+    var upperMaxFr = upperMax / upperHalfArray.length;
+    var upperAvgFr = upperAvg / upperHalfArray.length;
+    makeRoughBall(ball, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
+}
 
-        /* for (var i = 0; i < bar_count; i++) {
-             bar_pos = i * 4;
-             bar_width = 2;
-             bar_height = -(fbc_array[i] / 2);
-
-             //x.fillRect(bar_pos, canvas.height, bar_width, bar_height);
-         }*/
-    }
-    counter += 0.02;
-    //console.log(counter)
-
+function makeRoughBall(mesh, bassFr, treFr) {
+    console.log(mesh);
+    mesh.geometry.vertices.forEach(function (vertex, i) {
+        var offset = mesh.geometry.parameters.radius;
+        var amp = 7;
+        var time = window.performance.now();
+        vertex.normalize();
+        var rf = 0.00001;
+        var distance = (offset + bassFr) + noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr;
+        vertex.multiplyScalar(distance);
+    });
+    mesh.geometry.verticesNeedUpdate = true;
+    mesh.geometry.normalsNeedUpdate = true;
+    mesh.geometry.computeVertexNormals();
+    mesh.geometry.computeFaceNormals();
 }

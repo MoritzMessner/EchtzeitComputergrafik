@@ -27,7 +27,7 @@ function fft() {
 
     document.getElementById("source").appendChild(audio);
 
-    var context = new AudioContext();
+    /*var context = new AudioContext();
     analyser = context.createAnalyser();
     analyser.fftSize = 2048;
 
@@ -35,7 +35,15 @@ function fft() {
     let source = context.createMediaElementSource(audio);
     source.connect(analyser);
     source.connect(context.destination);
-
+*/
+    var context = new AudioContext();
+    var src = context.createMediaElementSource(audio);
+    analyser = context.createAnalyser();
+    src.connect(analyser);
+    analyser.connect(context.destination);
+    analyser.fftSize = 512;
+    var bufferLength = analyser.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength);
     audio.play();
     //animate();
 }
