@@ -102,7 +102,7 @@ function addMesh() {
      */
     let box = new Geometry();
     //box.addBoxGeometry(1, 1, 1).translateZ(-6)
-    return box.addSphere(2, 16).translateZ(-6);
+    return box.addSphere(1, 10).translateZ(-6);
 
 
 }
