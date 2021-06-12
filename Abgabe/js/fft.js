@@ -1,14 +1,3 @@
-var canvas,
-    ctx,
-    source,
-    context,
-    analyser,
-    fbc_array,
-    bar_count,
-    bar_pos,
-    bar_width,
-    bar_height,
-    audio;
 
 
 

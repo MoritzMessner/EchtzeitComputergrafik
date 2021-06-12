@@ -1,15 +1,9 @@
 import {ARButton} from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
 
-
-let loader; // Wir müssen eine Variable für einen gltf-Modell-Loader erstellen
-
-let counter = 0;
-let color = 0x00000;
-let flag = 1;
-var ball;
+let ball;
 init();
-animate();
 fft()
+animate();
 
 function init() {
     const container = document.createElement('div');
@@ -19,45 +13,26 @@ function init() {
 
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 40);
 
+    // enable and setup Renderer
     renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.xr.enabled = true; // Wir müssen den Renderer für WebXR aktivieren
     container.appendChild(renderer.domElement);
 
+    // Add light
     var light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
     light.position.set(0.5, 1, 0.25);
     scene.add(light);
 
+    // Add XR Buttons
     controller = renderer.xr.getController(0);
     controller.addEventListener('select', onSelect);
     scene.add(controller);
+
+    // Add Mesh
     ball = addMesh();
-
-    /*   // URL zum jeweiligen Objekt
-       const modelUrl = "./model/Snickers.glb";
-
-       // Erstellung  GLTF-Ladeobjekt. GLTF ist ein 3D-Modellformat, das üblicherweise als das "JPEG von 3D" bezeichnet wird, weil es schnell und effizient zu verwenden ist, was ideal für das Web ist
-       loader = new THREE.GLTFLoader();
-
-       // Laden des Modells
-       // loader takes in a few arguments loader(model url, onLoad callback, onProgress callback, onError callback)
-       loader.load(
-           // URL
-           modelUrl,
-           // onLoad callback: Was aufgerufen wird, sobald das vollständige Modell geladen ist.
-           function (gltf) {
-               // Die gltf.scene enthält die Objektgruppe Three.js, die das 3D-Objekt des Modells darstellt.
-               scene.add(gltf.scene);
-               meshes.push(gltf.scene);
-               console.log("Modell wurde der Szene hinzugefügt!");
-
-               gltf.scene.position.z = -0.25;
-           },
-       );
-
-     */
-
+    ball.position.z=-6;
 
     document.body.appendChild(ARButton.createButton(renderer));
 
@@ -81,6 +56,7 @@ function animate() {
 }
 
 function render() {
+    renderer.render(scene, camera);
 
     analyser.getByteFrequencyData(dataArray);
     var lowerHalfArray = dataArray.slice(0, (dataArray.length / 2) - 1);
@@ -96,7 +72,10 @@ function render() {
     var lowerAvgFr = lowerAvg / lowerHalfArray.length;
     var upperMaxFr = upperMax / upperHalfArray.length;
     var upperAvgFr = upperAvg / upperHalfArray.length;
-    makeRoughBall(ball, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
+
+    ball.rotation.y += -0.001;
+
+    //makeRoughBall(ball, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
 }
 
 function makeRoughBall(mesh, bassFr, treFr) {

@@ -24,6 +24,18 @@ class Geometry {
         _obj.scale.x = _value;
     }
 
+    additiveRotationZ(_obj, _value) {
+        _obj.rotation.z += _value;
+    }
+
+    additiveRotationY(_obj, _value) {
+        _obj.rotation.y += _value;
+    }
+
+    additiveRotationX(_obj, _value) {
+        _obj.rotation.x += _value;
+    }
+
     addBoxGeometry(_width, _height, _depth, _widthSegments = 4, _heightSegments = 4, _depthSegments = 4, _color = "black") {
         let geometryBox = new THREE.BoxGeometry(
             _width, _height, _depth,
@@ -43,8 +55,6 @@ class Geometry {
 
         let ball = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
         this.addToScene(ball);
-        ball.geometry.dynamic = true;
-        ball.position.set(0, 0, 0);
         return ball;
     }
 
@@ -64,6 +74,8 @@ class Geometry {
     addToScene(_obj) {
         meshes.push(_obj);
         scene.add(_obj);
+        console.log("added mesh to scene");
+        console.log(_obj);
     }
 
 }
