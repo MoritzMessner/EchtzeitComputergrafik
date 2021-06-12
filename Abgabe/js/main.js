@@ -12,14 +12,15 @@ function init() {
 
     scene = new THREE.Scene();
 
-    camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 40);
+    camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 60);
+    camera.position.z = 30;
 
 
     // enable and setup Renderer
     renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    //renderer.xr.enabled = true; // Wir müssen den Renderer für WebXR aktivieren
+    renderer.xr.enabled = true; // Wir müssen den Renderer für WebXR aktivieren
     container.appendChild(renderer.domElement);
 
     // Add light
@@ -28,9 +29,9 @@ function init() {
     scene.add(light);
 
     // Add XR Buttons
-    //controller = renderer.xr.getController(0);
-    //controller.addEventListener('select', onSelect);
-    //scene.add(controller);
+    controller = renderer.xr.getController(0);
+    controller.addEventListener('select', onSelect);
+    scene.add(controller);
 
     // Add Mesh
     ball = addMesh();
@@ -85,6 +86,7 @@ function render() {
 
     ball.rotation.y += -0.001;
     ball.rotation.y += -0.001 * getAmountOfMaxValues(lowerHalfArray, 200);
+
     // console.log(ball.geometry);
     //console.log(ball.geometry.isBufferGeometry);
 
@@ -119,8 +121,8 @@ function makeRoughBall(mesh, bassFr, treFr) {
         var amp = 7;
         var time = window.performance.now();
         vertex.normalize();
-        var rf = 0.0000001;
-        var distance = ((offset + bassFr) + noise.noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr)/10;
+        var rf = 0.000001;
+        var distance = ((offset + bassFr) + noise.noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr);
         vertex.multiplyScalar(distance);
     });
 
