@@ -59,6 +59,19 @@ class Geometry {
         return ball;
     }
 
+    addTorusKnot() {
+        let icosahedronGeometry = new THREE.TorusKnotGeometry( 100, 30, 100, 160 );
+        icosahedronGeometry.dynamic = true;
+        let lambertMaterial = new THREE.MeshLambertMaterial({
+            color: 0x000000,
+            //wireframe: true
+        });
+
+        let ball = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
+        this.addToScene(ball);
+        return ball;
+    }
+
     simpleColor(_color = "white") {
         let colorValue = 0xfff;
         switch (_color) {
@@ -103,6 +116,8 @@ function addMesh() {
     let box = new Geometry();
     //box.addBoxGeometry(1, 1, 1).translateZ(-6)
     return box.addSphere(2, 20).translateZ(-6);
+    //return box.addTorusKnot().translateZ(-6);
+    //return box.addBoxGeometry(3,4).translateZ(-6);
 
 
 }
