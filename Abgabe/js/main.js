@@ -85,7 +85,7 @@ function render() {
     //console.log("lowerFourthArray: "+lowerFourthArray);
 
     ball.rotation.y += -0.001;
-    ball.rotation.y += -0.00001 * getAmountOfMaxValues(lowerHalfArray, 200);
+    ball.rotation.y += -0.0001 * getAmountOfMaxValues(lowerHalfArray, 200);
 
     // console.log(ball.geometry);
     //console.log(ball.geometry.isBufferGeometry);
