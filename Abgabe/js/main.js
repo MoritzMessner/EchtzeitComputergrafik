@@ -122,7 +122,7 @@ function makeRoughBall(mesh, bassFr, treFr) {
         vertex.normalize();
         var rf = 0.000001;
         var distance = ((offset + bassFr) + noise.noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr);
-        vertex.multiplyScalar(distance / 20);
+        vertex.multiplyScalar(distance / 15);
     });
 
 
