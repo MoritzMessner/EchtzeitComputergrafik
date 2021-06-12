@@ -136,7 +136,7 @@ function getAmountOfMaxValues(arr, _val) {
     return arr.filter(x => x >= _val).length;
 }
 
-
+/*
 let grad3 = [[1, 1, 0], [-1, 1, 0], [1, -1, 0], [-1, -1, 0], [1, 0, 1], [-1, 0, 1], [1, 0, -1], [-1, 0, -1], [0, 1, 1], [0, -1, 1], [0, 1, -1], [0, -1, -1]];
 // 3D simplex noise
 // credit goes to https://weber.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf
@@ -264,3 +264,4 @@ function dot(g, x, y, z) {
 function fastfloor(x) {
     return x > 0 ? x : x - 1;
 }
+*/

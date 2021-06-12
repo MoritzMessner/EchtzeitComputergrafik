@@ -3,7 +3,7 @@
 
 function fft() {
 
-    let songs = ["audio/24 - Sail - Awolnation.mp3", "audio/Demons - Imagine Dragons.mp3", "audio/Never gonna give you up.mp3","audio/The Prodigy - Omen.mp3"];
+    let songs = ["audio/24 - Sail - Awolnation.mp3", "audio/Demons - Imagine Dragons.mp3", "audio/Never gonna give you up.mp3","audio/The Prodigy - Omen.mp3","audio/Eminem_-_Superman_Explicit.mp3"];
     //let songs = ["audio/24 - Sail - Awolnation.mp3"];
     let song = songs[Math.floor(Math.random() * songs.length)];
     console.log("playing song: " + song);

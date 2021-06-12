@@ -1,5 +1,6 @@
 import {ARButton} from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
 
+var noise = new SimplexNoise();
 let ball;
 init();
 fft()
@@ -13,11 +14,12 @@ function init() {
 
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 40);
 
+
     // enable and setup Renderer
     renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.xr.enabled = true; // Wir müssen den Renderer für WebXR aktivieren
+    //renderer.xr.enabled = true; // Wir müssen den Renderer für WebXR aktivieren
     container.appendChild(renderer.domElement);
 
     // Add light
@@ -26,9 +28,9 @@ function init() {
     scene.add(light);
 
     // Add XR Buttons
-    controller = renderer.xr.getController(0);
-    controller.addEventListener('select', onSelect);
-    scene.add(controller);
+    //controller = renderer.xr.getController(0);
+    //controller.addEventListener('select', onSelect);
+    //scene.add(controller);
 
     // Add Mesh
     ball = addMesh();
@@ -52,7 +54,8 @@ function onWindowResize() {
 }
 
 function animate() {
-    renderer.setAnimationLoop(render);
+    //renderer.setAnimationLoop(render);
+    requestAnimationFrame(render);
 }
 
 function render() {
@@ -82,19 +85,20 @@ function render() {
 
     ball.rotation.y += -0.001;
     ball.rotation.y += -0.001 * getAmountOfMaxValues(lowerHalfArray, 200);
-   // console.log(ball.geometry);
+    // console.log(ball.geometry);
     //console.log(ball.geometry.isBufferGeometry);
 
 
     makeRoughBall(ball, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
+    requestAnimationFrame(render);
 }
 
 function makeRoughBall(mesh, bassFr, treFr) {
+    /*
     const position = mesh.geometry.attributes.position;
-    const vertex = new THREE.Vector3();
-
+    console.log(mesh.geometry);
     for (let i = 0, l = position.count; i < l; i++) {
-
+        let vertex = new THREE.Vector3(position.getX(i), position.getY(i), position.getZ(i));
         vertex.fromBufferAttribute(position, i);
         vertex.applyMatrix4(mesh.matrixWorld);
         let offset = mesh.geometry.parameters.radius;
@@ -102,25 +106,26 @@ function makeRoughBall(mesh, bassFr, treFr) {
         let time = window.performance.now();
         vertex.normalize();
         let rf = 0.00001;
-        let distance = (offset + bassFr) + noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr;
-        //console.log(distance);
+        let distance = (offset + bassFr) + noise.noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr;
+        //console.log(vertex.x);
         vertex.multiplyScalar(distance);
-        mesh.geometry.attributes.position.setXYZ(i*2, vertex.x, vertex.y, vertex.z );
+        //mesh.geometry.attributes.position.setXYZ(i,  vertex.x,vertex.y,vertex.z);
 
     }
+*/
+
+    mesh.geometry.vertices.forEach(function (vertex, i) {
+        var offset = mesh.geometry.parameters.radius;
+        var amp = 7;
+        var time = window.performance.now();
+        vertex.normalize();
+        var rf = 0.0000001;
+        var distance = ((offset + bassFr) + noise.noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr)/10;
+        vertex.multiplyScalar(distance);
+    });
 
 
-    /*   mesh.geometry.vertices.forEach(function (vertex, i) {
-           var offset = mesh.geometry.parameters.radius;
-           var amp = 7;
-           var time = window.performance.now();
-           vertex.normalize();
-           var rf = 0.00001;
-           var distance = (offset + bassFr) + noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr;
-           vertex.multiplyScalar(distance);
-       });
-       */
-    position.needsUpdate = true;
+    //position.needsUpdate = true;
     mesh.geometry.verticesNeedUpdate = true;
     mesh.geometry.normalsNeedUpdate = true;
     mesh.geometry.computeVertexNormals();
