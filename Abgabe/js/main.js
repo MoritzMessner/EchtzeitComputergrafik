@@ -55,8 +55,8 @@ function onWindowResize() {
 }
 
 function animate() {
-    //renderer.setAnimationLoop(render);
-    requestAnimationFrame(render);
+    renderer.setAnimationLoop(render);
+    //requestAnimationFrame(render);
 }
 
 function render() {
@@ -92,11 +92,10 @@ function render() {
 
 
     makeRoughBall(ball, modulate(Math.pow(lowerMaxFr/10, 0.8), 0, 1, 0, 4), modulate(upperAvgFr/10, 0, 1, 0, 2));
-    requestAnimationFrame(render);
 }
 
 function makeRoughBall(mesh, bassFr, treFr) {
-
+/*
     const position = mesh.geometry.attributes.position;
     //console.log(mesh.geometry);
     for (let i = 0, l = position.count; i < l; i++) {
@@ -115,8 +114,7 @@ function makeRoughBall(mesh, bassFr, treFr) {
         //mesh.geometry.attributes.position.setXYZ(i,  vertex.x,vertex.y,vertex.z);
 
     }
-/*
-
+*/
     mesh.geometry.vertices.forEach(function (vertex, i) {
         var offset = mesh.geometry.parameters.radius;
         var amp = 7;
@@ -126,7 +124,7 @@ function makeRoughBall(mesh, bassFr, treFr) {
         var distance = ((offset + bassFr) + noise.noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr);
         vertex.multiplyScalar(distance);
     });
-*/
+
 
     //position.needsUpdate = true;
     mesh.geometry.verticesNeedUpdate = true;
