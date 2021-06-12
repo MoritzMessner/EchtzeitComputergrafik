@@ -35,7 +35,14 @@ function init() {
 
     // Add Mesh
     ball = addMesh();
-    ball.material.color.setRGB(0,0,0)
+    ball.material.color.setRGB(255, 255, 255)
+    ball.scale.x = ball.scale.y = ball.scale.z = 1.1;
+    ball = addMesh();
+    ball.material.color.setRGB(0, 0, 0);
+    ball.rotation.y = 100;
+
+    //let ball1 = addMesh();
+    //ball1.material.color.setRGB(200, 0, 0)
 
     //ball.position.z = -6;
 
@@ -86,7 +93,7 @@ function render() {
     //console.log("upperMax: " + upperMax);
     //console.log("upperAvg: " + upperAvg);
     //console.log("lowerFourthArray: "+lowerFourthArray);
-    for(let element of meshes){
+    for (let element of meshes) {
         element.rotation.y += -0.001;
         element.rotation.y += -0.0001 * getAmountOfMaxValues(lowerHalfArray, 200);
 
@@ -97,7 +104,7 @@ function render() {
 
     }
 
-  }
+}
 
 function randomColor(lowerHalfArray, upperHalfArray, obj) {
 

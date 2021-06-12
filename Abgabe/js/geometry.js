@@ -50,7 +50,7 @@ class Geometry {
         let icosahedronGeometry = new THREE.IcosahedronGeometry(_radius, _detail);
         icosahedronGeometry.dynamic = true;
         let lambertMaterial = new THREE.MeshLambertMaterial({
-            color: 0xff00ee,
+            color: 0x000000,
             //wireframe: true
         });
 
