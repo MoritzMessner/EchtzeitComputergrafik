@@ -73,7 +73,13 @@ function render() {
     var upperMaxFr = upperMax / upperHalfArray.length;
     var upperAvgFr = upperAvg / upperHalfArray.length;
 
+    console.log("lowerMax: "+lowerMax);
+    console.log("lowerAvg: "+lowerAvg);
+    console.log("upperMax: "+upperMax);
+    console.log("upperAvg: "+upperAvg);
+
     ball.rotation.y += -0.001;
+    ball.rotation.y += -0.0001 * (lowerAvg % 25);
 
     //makeRoughBall(ball, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
 }
