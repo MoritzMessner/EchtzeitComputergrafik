@@ -37,6 +37,7 @@ function init() {
     ball = addMesh();
     //ball.position.z = -6;
 
+
     document.body.appendChild(ARButton.createButton(renderer));
 
     window.addEventListener('resize', onWindowResize, false);
@@ -89,23 +90,22 @@ function render() {
 
     // console.log(ball.geometry);
     //console.log(ball.geometry.isBufferGeometry);
-
     randomColor(lowerHalfArray, upperHalfArray, ball)
     makeRoughBall(ball, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
 }
 
 function randomColor(lowerHalfArray, upperHalfArray, obj) {
 
-    let factor = 1000;
-    if (getAmountOfMaxValues(lowerHalfArray, 10) < getAmountOfMaxValues(upperHalfArray, 240)) {
-        let r = ((Math.floor(Math.random() * factor) % 125 + 100));
-        let g = (Math.floor(Math.random() * factor) % 125 + 100);
-        let b = (Math.floor(Math.random() * factor) % 125 + 100);
+    let factor = 500;
+    if (getAmountOfMaxValues(lowerHalfArray, 200) < getAmountOfMaxValues(upperHalfArray, 200)) {
+        let r = ((Math.floor() * factor) % 255 + 100);
+        let g = ((Math.floor() * factor) % 255 + 100);
+        let b = ((Math.floor() * factor) % 255 + 100);
         obj.material.color.setRGB(r, g, b)
     } else {
-        let r = ((Math.floor(Math.random() * factor) % 2));
-        let g = (Math.floor(Math.random() * factor) % 2);
-        let b = (Math.floor(Math.random() * factor) % 2);
+        let r = ((Math.floor() * factor % 100));
+        let g = (Math.floor() * factor % 100);
+        let b = (Math.floor() * factor % 100);
         obj.material.color.setRGB(r, g, b)
     }
 
