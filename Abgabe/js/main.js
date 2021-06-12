@@ -96,13 +96,13 @@ function render() {
 }
 
 function makeRoughBall(mesh, bassFr, treFr) {
-    /*
+
     const position = mesh.geometry.attributes.position;
-    console.log(mesh.geometry);
+    //console.log(mesh.geometry);
     for (let i = 0, l = position.count; i < l; i++) {
         let vertex = new THREE.Vector3(position.getX(i), position.getY(i), position.getZ(i));
         vertex.fromBufferAttribute(position, i);
-        vertex.applyMatrix4(mesh.matrixWorld);
+        //vertex.applyMatrix4(mesh.matrixWorld);
         let offset = mesh.geometry.parameters.radius;
         let amp = 7;
         let time = window.performance.now();
@@ -111,10 +111,11 @@ function makeRoughBall(mesh, bassFr, treFr) {
         let distance = (offset + bassFr) + noise.noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr;
         //console.log(vertex.x);
         vertex.multiplyScalar(distance);
+        mesh.localToWorld(vertex);
         //mesh.geometry.attributes.position.setXYZ(i,  vertex.x,vertex.y,vertex.z);
 
     }
-*/
+/*
 
     mesh.geometry.vertices.forEach(function (vertex, i) {
         var offset = mesh.geometry.parameters.radius;
@@ -125,7 +126,7 @@ function makeRoughBall(mesh, bassFr, treFr) {
         var distance = ((offset + bassFr) + noise.noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr);
         vertex.multiplyScalar(distance);
     });
-
+*/
 
     //position.needsUpdate = true;
     mesh.geometry.verticesNeedUpdate = true;
