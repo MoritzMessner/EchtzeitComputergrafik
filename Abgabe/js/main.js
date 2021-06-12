@@ -90,8 +90,28 @@ function render() {
     // console.log(ball.geometry);
     //console.log(ball.geometry.isBufferGeometry);
 
-
+    randomColor(lowerHalfArray, upperHalfArray, ball)
     makeRoughBall(ball, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
+}
+
+function randomColor(lowerHalfArray, upperHalfArray, obj) {
+
+    let factor = 1000;
+    if (getAmountOfMaxValues(lowerHalfArray, 10) < getAmountOfMaxValues(upperHalfArray, 240)) {
+        let r = ((Math.floor(Math.random() * factor) % 125 + 100));
+        let g = (Math.floor(Math.random() * factor) % 125 + 100);
+        let b = (Math.floor(Math.random() * factor) % 125 + 100);
+        obj.material.color.setRGB(r, g, b)
+    } else {
+        let r = ((Math.floor(Math.random() * factor) % 2));
+        let g = (Math.floor(Math.random() * factor) % 2);
+        let b = (Math.floor(Math.random() * factor) % 2);
+        obj.material.color.setRGB(r, g, b)
+    }
+
+
+    // todo change color according to color in use
+    //let color4 = new THREE.Color("rgb(100%, 0%, 0%)");
 }
 
 function makeRoughBall(mesh, bassFr, treFr) {
@@ -120,9 +140,9 @@ function makeRoughBall(mesh, bassFr, treFr) {
         var amp = 7;
         var time = window.performance.now();
         vertex.normalize();
-        var rf = 0.000001;
-        var distance = ((offset + bassFr) + noise.noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr);
-        vertex.multiplyScalar(distance / 15);
+        var rf = 0.0001;
+        var distance = ((offset + bassFr) + noise.noise3D((vertex.x + time * rf * 7) / 2, (vertex.y + time * rf * 8) / 2, (vertex.z + time * rf * 9) / 2) * amp * treFr);
+        vertex.multiplyScalar(Math.abs(distance / 6));
     });
 
 
