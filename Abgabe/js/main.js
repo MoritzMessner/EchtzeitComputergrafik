@@ -32,7 +32,7 @@ function init() {
 
     // Add Mesh
     ball = addMesh();
-    ball.position.z=-6;
+    ball.position.z = -6;
 
     document.body.appendChild(ARButton.createButton(renderer));
 
@@ -60,6 +60,7 @@ function render() {
 
     analyser.getByteFrequencyData(dataArray);
     var lowerHalfArray = dataArray.slice(0, (dataArray.length / 2) - 1);
+    var lowerFourthArray = lowerHalfArray.slice(0, (lowerHalfArray.length / 4) - 1);
     var upperHalfArray = dataArray.slice((dataArray.length / 2) - 1, dataArray.length - 1);
 
     var overallAvg = avg(dataArray);
@@ -73,30 +74,56 @@ function render() {
     var upperMaxFr = upperMax / upperHalfArray.length;
     var upperAvgFr = upperAvg / upperHalfArray.length;
 
-    console.log("lowerMax: "+lowerMax);
-    console.log("lowerAvg: "+lowerAvg);
-    console.log("upperMax: "+upperMax);
-    console.log("upperAvg: "+upperAvg);
+    //console.log("lowerMax: " + lowerMax);
+    //console.log("lowerAvg: " + lowerAvg);
+    //console.log("upperMax: " + upperMax);
+    //console.log("upperAvg: " + upperAvg);
+    //console.log("lowerFourthArray: "+lowerFourthArray);
 
     ball.rotation.y += -0.001;
-    ball.rotation.y += -0.0001 * (lowerAvg % 25);
+    ball.rotation.y += -0.001 * getAmountOfMaxValues(lowerHalfArray, 200);
+   // console.log(ball.geometry);
+    //console.log(ball.geometry.isBufferGeometry);
 
-    //makeRoughBall(ball, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
+
+    makeRoughBall(ball, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
 }
 
 function makeRoughBall(mesh, bassFr, treFr) {
-    console.log(mesh);
-    mesh.geometry.vertices.forEach(function (vertex, i) {
-        var offset = mesh.geometry.parameters.radius;
-        var amp = 7;
-        var time = window.performance.now();
+    const position = mesh.geometry.attributes.position;
+    const vertex = new THREE.Vector3();
+
+    for (let i = 0, l = position.count; i < l; i++) {
+
+        vertex.fromBufferAttribute(position, i);
+        vertex.applyMatrix4(mesh.matrixWorld);
+        let offset = mesh.geometry.parameters.radius;
+        let amp = 7;
+        let time = window.performance.now();
         vertex.normalize();
-        var rf = 0.00001;
-        var distance = (offset + bassFr) + noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr;
+        let rf = 0.00001;
+        let distance = (offset + bassFr) + noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr;
+        //console.log(distance);
         vertex.multiplyScalar(distance);
-    });
+        mesh.geometry.attributes.position.setXYZ(i*2, vertex.x, vertex.y, vertex.z );
+
+    }
+
+
+    /*   mesh.geometry.vertices.forEach(function (vertex, i) {
+           var offset = mesh.geometry.parameters.radius;
+           var amp = 7;
+           var time = window.performance.now();
+           vertex.normalize();
+           var rf = 0.00001;
+           var distance = (offset + bassFr) + noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr;
+           vertex.multiplyScalar(distance);
+       });
+       */
+    position.needsUpdate = true;
     mesh.geometry.verticesNeedUpdate = true;
     mesh.geometry.normalsNeedUpdate = true;
     mesh.geometry.computeVertexNormals();
     mesh.geometry.computeFaceNormals();
+
 }

@@ -48,6 +48,7 @@ class Geometry {
 
     addSphere(_radius, _detail) {
         let icosahedronGeometry = new THREE.IcosahedronGeometry(_radius, _detail);
+        icosahedronGeometry.dynamic = true;
         let lambertMaterial = new THREE.MeshLambertMaterial({
             color: 0xff00ee,
             wireframe: true
@@ -106,6 +107,7 @@ function addMesh() {
 
 }
 
+
 //some helper functions here
 function fractionate(val, minVal, maxVal) {
     return (val - minVal) / (maxVal - minVal);
@@ -129,6 +131,11 @@ function max(arr) {
         return Math.max(a, b);
     })
 }
+
+function getAmountOfMaxValues(arr, _val) {
+    return arr.filter(x => x >= _val).length;
+}
+
 
 let grad3 = [[1, 1, 0], [-1, 1, 0], [1, -1, 0], [-1, -1, 0], [1, 0, 1], [-1, 0, 1], [1, 0, -1], [-1, 0, -1], [0, 1, 1], [0, -1, 1], [0, 1, -1], [0, -1, -1]];
 // 3D simplex noise
