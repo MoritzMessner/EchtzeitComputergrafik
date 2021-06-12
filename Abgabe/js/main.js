@@ -35,7 +35,7 @@ function init() {
 
     // Add Mesh
     ball = addMesh();
-    ball.position.z = -6;
+    //ball.position.z = -6;
 
     document.body.appendChild(ARButton.createButton(renderer));
 
