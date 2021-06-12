@@ -91,7 +91,7 @@ function render() {
     //console.log(ball.geometry.isBufferGeometry);
 
 
-    makeRoughBall(ball, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
+    makeRoughBall(ball, modulate(Math.pow(lowerMaxFr/10, 0.8), 0, 1, 0, 4), modulate(upperAvgFr/10, 0, 1, 0, 2));
     requestAnimationFrame(render);
 }
 
@@ -123,7 +123,7 @@ function makeRoughBall(mesh, bassFr, treFr) {
         vertex.normalize();
         var rf = 0.000001;
         var distance = ((offset + bassFr) + noise.noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr);
-        vertex.multiplyScalar(distance/10);
+        vertex.multiplyScalar(distance);
     });
 
 
