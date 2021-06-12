@@ -35,6 +35,8 @@ function init() {
 
     // Add Mesh
     ball = addMesh();
+    ball.material.color.setRGB(0,0,0)
+
     //ball.position.z = -6;
 
 
@@ -84,15 +86,18 @@ function render() {
     //console.log("upperMax: " + upperMax);
     //console.log("upperAvg: " + upperAvg);
     //console.log("lowerFourthArray: "+lowerFourthArray);
+    for(let element of meshes){
+        element.rotation.y += -0.001;
+        element.rotation.y += -0.0001 * getAmountOfMaxValues(lowerHalfArray, 200);
 
-    ball.rotation.y += -0.001;
-    ball.rotation.y += -0.0001 * getAmountOfMaxValues(lowerHalfArray, 200);
+        // console.log(ball.geometry);
+        //console.log(ball.geometry.isBufferGeometry);
+        //randomColor(lowerHalfArray, upperHalfArray, ball)
+        makeRoughBall(element, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
 
-    // console.log(ball.geometry);
-    //console.log(ball.geometry.isBufferGeometry);
-    randomColor(lowerHalfArray, upperHalfArray, ball)
-    makeRoughBall(ball, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
-}
+    }
+
+  }
 
 function randomColor(lowerHalfArray, upperHalfArray, obj) {
 

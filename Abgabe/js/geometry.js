@@ -51,7 +51,7 @@ class Geometry {
         icosahedronGeometry.dynamic = true;
         let lambertMaterial = new THREE.MeshLambertMaterial({
             color: 0xff00ee,
-            wireframe: true
+            //wireframe: true
         });
 
         let ball = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
@@ -102,7 +102,7 @@ function addMesh() {
      */
     let box = new Geometry();
     //box.addBoxGeometry(1, 1, 1).translateZ(-6)
-    return box.addSphere(2, 10).translateZ(-6);
+    return box.addSphere(2, 20).translateZ(-6);
 
 
 }
