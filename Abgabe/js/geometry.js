@@ -150,6 +150,9 @@ function max(arr) {
 function getAmountOfMaxValues(arr, _val) {
     return arr.filter(x => x >= _val).length;
 }
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
 
 /*
 let grad3 = [[1, 1, 0], [-1, 1, 0], [1, -1, 0], [-1, -1, 0], [1, 0, 1], [-1, 0, 1], [1, 0, -1], [-1, 0, -1], [0, 1, 1], [0, -1, 1], [0, 1, -1], [0, -1, -1]];

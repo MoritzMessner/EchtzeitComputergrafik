@@ -41,6 +41,26 @@ function init() {
     ballTwo.material.color.setRGB(0, 0, 0);
     ballTwo.rotation.y = Math.random() * 100;
 
+    /*
+        for (var i = 0; i < 8; i+=2) {
+            ballTwo = addMesh();
+            ballTwo.material.color.setRGB(0, 0, 0);
+            ballTwo.rotation.y = Math.random() * 100;
+            ballTwo.material.color.setRGB(0, 0, 0);
+            let max = 10;
+            let min = -max;
+            let x = getRandomArbitrary(min, max);
+            let y= getRandomArbitrary(min, max);
+            let z =getRandomArbitrary(min, max);
+            ballTwo.position.set(x, y, z)
+            ballTwo = addMesh();
+            ballTwo.material.color.setRGB(0, 0, 0);
+            ballTwo.rotation.y = Math.random() * 100;
+            ballTwo.position.set(x, y, z)
+            ballTwo.material.color.setRGB(255, 255, 255);
+
+        }
+    */
     //let ball1 = addMesh();
     //ball1.material.color.setRGB(200, 0, 0)
 
@@ -112,9 +132,9 @@ function randomColor(lowerHalfArray, upperHalfArray, obj) {
     let lowerAmount = getAmountOfMaxValues(lowerHalfArray, 100)
     let upperAmount = getAmountOfMaxValues(upperHalfArray, 100);
     if (lowerAmount < upperAmount) {
-        let r = upperAmount * (Math.random() + 1) % 125 ;
-        let g = upperAmount * (Math.random() + 1) % 125 ;
-        let b = upperAmount * (Math.random() + 1) % 125 ;
+        let r = upperAmount * (Math.random() + 1) % 125;
+        let g = upperAmount * (Math.random() + 1) % 125;
+        let b = upperAmount * (Math.random() + 1) % 125;
         console.log(r, g, b);
         obj.material.color.setRGB(r, g, b)
     } else {
@@ -158,7 +178,7 @@ function makeRoughBall(mesh, bassFr, treFr) {
         vertex.normalize();
         var rf = 0.0001;
         var distance = ((offset + bassFr) + noise.noise3D((vertex.x + time * rf * 7) / 2, (vertex.y + time * rf * 8) / 2, (vertex.z + time * rf * 9) / 2) * amp * treFr);
-        vertex.multiplyScalar(Math.abs(distance / 18));
+        vertex.multiplyScalar(Math.abs(distance / 10));
     });
 
 
