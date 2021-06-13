@@ -37,9 +37,9 @@ function init() {
     ball = addMesh();
     ball.material.color.setRGB(255, 255, 255)
     ball.scale.x = ball.scale.y = ball.scale.z = 1.1;
-    ball = addMesh();
-    ball.material.color.setRGB(0, 0, 0);
-    ball.rotation.y = 100;
+    let ballTwo = addMesh();
+    ballTwo.material.color.setRGB(0, 0, 0);
+    ballTwo.rotation.y = Math.random() * 100;
 
     //let ball1 = addMesh();
     //ball1.material.color.setRGB(200, 0, 0)
@@ -99,25 +99,29 @@ function render() {
 
         // console.log(ball.geometry);
         //console.log(ball.geometry.isBufferGeometry);
-        //randomColor(lowerHalfArray, upperHalfArray, ball)
         makeRoughBall(element, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
 
     }
+    //randomColor(lowerHalfArray, upperHalfArray, ball)
 
 }
 
 function randomColor(lowerHalfArray, upperHalfArray, obj) {
 
     let factor = 500;
-    if (getAmountOfMaxValues(lowerHalfArray, 200) < getAmountOfMaxValues(upperHalfArray, 200)) {
-        let r = ((Math.floor() * factor) % 255 + 100);
-        let g = ((Math.floor() * factor) % 255 + 100);
-        let b = ((Math.floor() * factor) % 255 + 100);
+    let lowerAmount = getAmountOfMaxValues(lowerHalfArray, 100)
+    let upperAmount = getAmountOfMaxValues(upperHalfArray, 100);
+    if (lowerAmount < upperAmount) {
+        let r = upperAmount * (Math.random() + 1) % 125 ;
+        let g = upperAmount * (Math.random() + 1) % 125 ;
+        let b = upperAmount * (Math.random() + 1) % 125 ;
+        console.log(r, g, b);
         obj.material.color.setRGB(r, g, b)
     } else {
-        let r = ((Math.floor() * factor % 100));
-        let g = (Math.floor() * factor % 100);
-        let b = (Math.floor() * factor % 100);
+        let r = lowerAmount * (Math.random() + 1) % 100;
+        let g = lowerAmount * (Math.random() + 1) % 100;
+        let b = lowerAmount * (Math.random() + 1) % 100;
+        console.log(r, g, b);
         obj.material.color.setRGB(r, g, b)
     }
 

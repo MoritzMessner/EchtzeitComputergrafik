@@ -1,6 +1,6 @@
 function fft() {
 
-    let songs = ["audio/24 - Sail - Awolnation.mp3", "audio/Demons - Imagine Dragons.mp3",
+    /*et songs = ["audio/24 - Sail - Awolnation.mp3", "audio/Demons - Imagine Dragons.mp3",
         "audio/Never gonna give you up.mp3",
         "audio/The Prodigy - Omen.mp3",
         "audio/Timbaland_-_Apologize_ft._OneRepublic.mp3",
@@ -12,16 +12,21 @@ function fft() {
         "audio/The_Script_-_Hall_of_Fame_ft._will.i.am.mp3",
         "audio/Eminem_-_Superman_Explicit.mp3"];
     //let songs = ["audio/24 - Sail - Awolnation.mp3"];
-    let song = songs[Math.floor(Math.random() * songs.length)];
-    console.log("playing song: " + song);
-    audio = new Audio();
 
-    audio.src = song;
-    audio.controls = true;
+     */
+    //let song = songs[Math.floor(Math.random() * songs.length)];
+
+
+
+    ///console.log("playing song: " + song);
+   /* audio = new Audio();
+
+    audio.src = source;
+    audio.controls = true;///
     audio.loop = false;
-    audio.autoplay = false;
+    audio.autoplay = false;*/
 
-    document.getElementById("source").appendChild(audio);
+    //document.getElementById("source").appendChild(audio);
 
     /*var context = new AudioContext();
     analyser = context.createAnalyser();
@@ -32,6 +37,7 @@ function fft() {
     source.connect(analyser);
     source.connect(context.destination);
 */
+    audio = document.getElementById("audio");
     var context = new AudioContext();
     var src = context.createMediaElementSource(audio);
     analyser = context.createAnalyser();
@@ -40,7 +46,7 @@ function fft() {
     analyser.fftSize = 512;
     var bufferLength = analyser.frequencyBinCount;
     dataArray = new Uint8Array(bufferLength);
-    audio.play();
+    //audio.play();
     //animate();
 }
 
@@ -48,3 +54,10 @@ function fft() {
 function pause() {
     audio.pause();
 }
+function handleFiles(event) {
+    var files = event.target.files;
+    $("#src").attr("src", URL.createObjectURL(files[0]));
+    document.getElementById("audio").load();
+}
+
+document.getElementById("upload").addEventListener("change", handleFiles, false);

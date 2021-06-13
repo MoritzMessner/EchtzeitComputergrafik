@@ -11,6 +11,7 @@
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.js" crossorigin="anonymous"></script>-->
     <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.3.0/simplex-noise.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -34,10 +35,13 @@
         audio;
 
 </script>
-<button onclick="fft()">PLAY</button>
-<button onclick="pause()">PAUSE</button>
-<button onclick="addMesh()">NEUES DING</button>
-<audio id="source"></audio>
+<input type="file" id="upload" />
+<!--<button onclick="fft()">PLAY</button>-->
+<!--<button onclick="pause()">PAUSE</button>-->
+<!--<button onclick="addMesh()">NEUES DING</button>-->
+<audio id="audio" controls>
+    <source src="" id="src" />
+</audio>
 <script src="js/geometry.js" defer></script>
 <script src="js/fft.js" defer></script>
 <script type="module" src="js/main.js" defer></script>
