@@ -86,27 +86,26 @@ function onWindowResize() {
 
 function animate() {
     renderer.setAnimationLoop(render);
-    //requestAnimationFrame(render);
 }
 
 function render() {
     renderer.render(scene, camera);
 
     analyser.getByteFrequencyData(dataArray);
-    var lowerHalfArray = dataArray.slice(0, (dataArray.length / 2) - 1);
-    var lowerFourthArray = lowerHalfArray.slice(0, (lowerHalfArray.length / 4) - 1);
-    var upperHalfArray = dataArray.slice((dataArray.length / 2) - 1, dataArray.length - 1);
+    let lowerHalfArray = dataArray.slice(0, (dataArray.length / 2) - 1);
+    let lowerFourthArray = lowerHalfArray.slice(0, (lowerHalfArray.length / 4) - 1);
+    let upperHalfArray = dataArray.slice((dataArray.length / 2) - 1, dataArray.length - 1);
 
-    var overallAvg = avg(dataArray);
-    var lowerMax = max(lowerHalfArray);
-    var lowerAvg = avg(lowerHalfArray);
-    var upperMax = max(upperHalfArray);
-    var upperAvg = avg(upperHalfArray);
+    let overallAvg = avg(dataArray);
+    let lowerMax = max(lowerHalfArray);
+    let lowerAvg = avg(lowerHalfArray);
+    let upperMax = max(upperHalfArray);
+    let upperAvg = avg(upperHalfArray);
 
-    var lowerMaxFr = lowerMax / lowerHalfArray.length;
-    var lowerAvgFr = lowerAvg / lowerHalfArray.length;
-    var upperMaxFr = upperMax / upperHalfArray.length;
-    var upperAvgFr = upperAvg / upperHalfArray.length;
+    let lowerMaxFr = lowerMax / lowerHalfArray.length;
+    let lowerAvgFr = lowerAvg / lowerHalfArray.length;
+    let upperMaxFr = upperMax / upperHalfArray.length;
+    let upperAvgFr = upperAvg / upperHalfArray.length;
 
     //console.log("lowerMax: " + lowerMax);
     //console.log("lowerAvg: " + lowerAvg);
@@ -116,10 +115,7 @@ function render() {
     for (let element of meshes) {
         element.rotation.y += -0.001;
         element.rotation.y += -0.0001 * getAmountOfMaxValues(lowerHalfArray, 200);
-
-        // console.log(ball.geometry);
-        //console.log(ball.geometry.isBufferGeometry);
-        makeRoughBall(element, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
+        distortSurface(element, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 8), modulate(upperAvgFr, 0, 1, 0, 4));
 
     }
     //randomColor(lowerHalfArray, upperHalfArray, ball)
@@ -150,27 +146,8 @@ function randomColor(lowerHalfArray, upperHalfArray, obj) {
     //let color4 = new THREE.Color("rgb(100%, 0%, 0%)");
 }
 
-function makeRoughBall(mesh, bassFr, treFr) {
-    /*
-        const position = mesh.geometry.attributes.position;
-        //console.log(mesh.geometry);
-        for (let i = 0, l = position.count; i < l; i++) {
-            let vertex = new THREE.Vector3(position.getX(i), position.getY(i), position.getZ(i));
-            vertex.fromBufferAttribute(position, i);
-            //vertex.applyMatrix4(mesh.matrixWorld);
-            let offset = mesh.geometry.parameters.radius;
-            let amp = 7;
-            let time = window.performance.now();
-            vertex.normalize();
-            let rf = 0.00001;
-            let distance = (offset + bassFr) + noise.noise3D(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr;
-            //console.log(vertex.x);
-            vertex.multiplyScalar(distance);
-            mesh.localToWorld(vertex);
-            //mesh.geometry.attributes.position.setXYZ(i,  vertex.x,vertex.y,vertex.z);
-
-        }
-    */
+function distortSurface(mesh, bassFr, treFr) {
+    
     mesh.geometry.vertices.forEach(function (vertex, i) {
         var offset = mesh.geometry.parameters.radius;
         var amp = 7;
