@@ -115,7 +115,7 @@ function render() {
     for (let element of meshes) {
         element.rotation.y += -0.001;
         element.rotation.y += -0.0001 * getAmountOfMaxValues(lowerHalfArray, 200);
-        distortSurface(element, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 6), modulate(upperAvgFr, 0, 1, 0, 3));
+        distortSurface(element, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 7), modulate(upperAvgFr, 0, 1, 0, 2));
 
     }
     //randomColor(lowerHalfArray, upperHalfArray, ball)

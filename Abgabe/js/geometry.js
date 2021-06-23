@@ -129,13 +129,13 @@ function fractionate(val, minVal, maxVal) {
 }
 
 function modulate(val, minVal, maxVal, outMin, outMax) {
-    var fr = fractionate(val, minVal, maxVal);
-    var delta = outMax - outMin;
+    let fr = fractionate(val, minVal, maxVal);
+    let delta = outMax - outMin;
     return outMin + (fr * delta);
 }
 
 function avg(arr) {
-    var total = arr.reduce(function (sum, b) {
+    let total = arr.reduce(function (sum, b) {
         return sum + b;
     });
     return (total / arr.length);
