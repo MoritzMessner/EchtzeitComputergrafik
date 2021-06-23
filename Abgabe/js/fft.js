@@ -38,13 +38,13 @@ function fft() {
     source.connect(context.destination);
 */
     audio = document.getElementById("audio");
-    var context = new AudioContext();
-    var src = context.createMediaElementSource(audio);
+    let context = new AudioContext();
+    let src = context.createMediaElementSource(audio);
     analyser = context.createAnalyser();
     src.connect(analyser);
     analyser.connect(context.destination);
     analyser.fftSize = 512;
-    var bufferLength = analyser.frequencyBinCount;
+    let bufferLength = analyser.frequencyBinCount;
     dataArray = new Uint8Array(bufferLength);
     //audio.play();
     //animate();

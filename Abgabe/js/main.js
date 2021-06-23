@@ -149,12 +149,12 @@ function randomColor(lowerHalfArray, upperHalfArray, obj) {
 function distortSurface(mesh, bassFr, treFr) {
     
     mesh.geometry.vertices.forEach(function (vertex, i) {
-        var offset = mesh.geometry.parameters.radius;
-        var amp = 7;
-        var time = window.performance.now();
+        let offset = mesh.geometry.parameters.radius;
+        let amp = 7;
+        let time = window.performance.now();
         vertex.normalize();
-        var rf = 0.0001;
-        var distance = ((offset + bassFr) + noise.noise3D((vertex.x + time * rf * 7) / 2, (vertex.y + time * rf * 8) / 2, (vertex.z + time * rf * 9) / 2) * amp * treFr);
+        let rf = 0.0001;
+        let distance = ((offset + bassFr) + noise.noise3D((vertex.x + time * rf * 7) / 2, (vertex.y + time * rf * 8) / 2, (vertex.z + time * rf * 9) / 2) * amp * treFr);
         vertex.multiplyScalar(Math.abs(distance / 10));
     });
 
