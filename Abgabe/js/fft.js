@@ -47,7 +47,6 @@ function fft() {
     let bufferLength = analyser.frequencyBinCount;
     dataArray = new Uint8Array(bufferLength);
     //audio.play();
-    //animate();
 }
 
 
