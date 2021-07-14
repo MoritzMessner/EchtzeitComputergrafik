@@ -11,10 +11,33 @@
     <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.3.0/simplex-noise.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="js/geometry.js" defer></script>
+    <script src="js/fft.js" defer></script>
+    <script type="module" src="js/main.js"></script>
+    <script src="js/movement.js" defer></script>
+    <script src="js/start.js" type="module" defer></script>
 </head>
 
 <body>
+<div id="body-wrapper">
+    <div class="flex-container">
+        <div class="flex-item" onclick="window.start('black-white')">black-white</div>
+        <div class="flex-item" onclick="window.start('white-black')">white-black</div>
+        <div class="flex-item" onclick="window.start('white-wireframe')">white-wireframe</div>
+        <div class="flex-item" onclick="window.start('black-wireframe')">black-wireframe</div>
+        <div class="flex-item" onclick="window.start('blue-red-wireframe')">blue-red-wireframe</div>
+        <div class="flex-item" onclick="window.start('red-blue-wireframe')">red-blue-wireframe</div>
+        <div class="flex-item" onclick="window.start('cube-black-wireframe')">cube-black-wireframe</div>
+        <div class="flex-item" onclick="window.start()">Sytle 8</div>
 
+
+        <input type="file" id="upload"/>
+        <audio id="audio" controls>
+            <source src="audio/Maitre_Gims_-_Est-ce_que_tu_maimes__.mp3" id="src"/>
+        </audio>
+    </div>
+
+</div>
 
 <script>
     var meshes = [];
@@ -29,21 +52,12 @@
         bar_count,
         bar_pos,
         bar_height,
-        audio;
+        audio,
+        ball;
 
 
 </script>
-<input type="file" id="upload" />
-<!--<button onclick="fft()">PLAY</button>-->
-<!--<button onclick="pause()">PAUSE</button>-->
-<!--<button onclick="addMesh()">NEUES DING</button>-->
-<audio id="audio" controls onclick="playMusic()">
-    <source src="audio/Maitre_Gims_-_Est-ce_que_tu_maimes__.mp3" id="src" />
-</audio>
-<script src="js/geometry.js" defer></script>
-<script src="js/fft.js" defer></script>
-<script type="module" src="js/main.js" defer></script>
-<script src="js/movement.js" defer></script>
+<button onclick="window.menu()">BackToMenu</button>
 
 
 </body>

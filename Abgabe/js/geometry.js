@@ -1,3 +1,5 @@
+var noise = new SimplexNoise();
+
 class Geometry {
 
     translateZ(_obj, _value) {
@@ -40,18 +42,35 @@ class Geometry {
         let geometryBox = new THREE.BoxGeometry(
             _width, _height, _depth,
             _widthSegments, _heightSegments, _depthSegments);
-        var materialBox = new THREE.MeshBasicMaterial({color: this.simpleColor(_color)});
-        var box = new THREE.Mesh(geometryBox, materialBox);
+        //var materialBox = new THREE.MeshBasicMaterial({color: this.simpleColor(_color)});
+        let lambertMaterial = new THREE.MeshLambertMaterial({
+            color: 0x000000,
+            wireframe: true
+        });
+        var box = new THREE.Mesh(geometryBox, lambertMaterial);
         this.addToScene(box);
         return box;
     }
 
-    addSphere(_radius, _detail) {
+    addSphere(_radius, _detail, _wireframe = false) {
         let icosahedronGeometry = new THREE.IcosahedronGeometry(_radius, _detail);
         icosahedronGeometry.dynamic = true;
         let lambertMaterial = new THREE.MeshLambertMaterial({
             color: 0x000000,
-            //wireframe: true
+            wireframe: _wireframe
+        });
+
+        let ball = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
+        this.addToScene(ball);
+        return ball;
+    }
+
+    addPlane(width, height, widthSegments, heightSegments) {
+        let icosahedronGeometry = new THREE.PlaneGeometry(width, height, widthSegments, heightSegments);
+        icosahedronGeometry.dynamic = true;
+        let lambertMaterial = new THREE.MeshLambertMaterial({
+            color: 0x000000,
+            wireframe: true
         });
 
         let ball = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
@@ -60,11 +79,11 @@ class Geometry {
     }
 
     addTorusKnot() {
-        let icosahedronGeometry = new THREE.TorusKnotGeometry( 100, 30, 100, 160 );
+        let icosahedronGeometry = new THREE.TorusKnotGeometry(100, 30, 100, 160);
         icosahedronGeometry.dynamic = true;
         let lambertMaterial = new THREE.MeshLambertMaterial({
             color: 0x000000,
-            //wireframe: true
+            wireframe: true
         });
 
         let ball = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
@@ -88,40 +107,73 @@ class Geometry {
     addToScene(_obj) {
         meshes.push(_obj);
         scene.add(_obj);
-        console.log("added mesh to scene");
-        console.log(_obj);
     }
 
 }
 
-function addMesh() {
-    /*var geometry_sphere = new THREE.SphereGeometry(2, 10, 15);
-    var material_sphere = new THREE.MeshBasicMaterial({color: 0x0011ff});
-    var sphere = new THREE.Mesh(geometry_sphere, wireframe);
-
-    var wireframe = new THREE.WireframeGeometry(geometry_sphere)
-
-
-    var line = new THREE.LineSegments(wireframe);
-    line.material.depthTest = false;
-    line.material.opacity = 0.25;
-    line.material.transparent = false;
-
-    line.position.z = -6;
-    line.material.color.setRGB(0, 0, 0)
-    meshes.push(line);
-    scene.add(line);
-
-     */
+function addSphereToScene(_wireframe = false) {
     let box = new Geometry();
-    //box.addBoxGeometry(1, 1, 1).translateZ(-6)
-    return box.addSphere(2, 20).translateZ(-6);
-    //return box.addTorusKnot().translateZ(-6);
-    //return box.addBoxGeometry(3,4).translateZ(-6);
+    return box.addSphere(1, 20, _wireframe).translateZ(-6);
+}
 
+function addCubeToScene(_wireframe = false) {
+    let box = new Geometry();
+    return box.addBoxGeometry(3,3,3,30,30,30).translateZ(-6);
+}
+
+function distortSurface(mesh, bassFr, treFr) {
+
+    if (mesh.geometry.type === "IcosahedronGeometry") {
+        mesh.geometry.vertices.forEach(function (vertex, i) {
+            let offset = mesh.geometry.parameters.radius;
+            let amp = 7;
+            let time = window.performance.now();
+            vertex.normalize();
+            let rf = 0.0001;
+            let distance = ((offset + bassFr * 2) + noise.noise3D((vertex.x + time * rf * 7) / 2, (vertex.y + time * rf * 8) / 2, (vertex.z + time * rf * 9) / 2) * amp * treFr);
+            vertex.multiplyScalar(Math.abs(distance / 15));
+        });
+    } else {
+        mesh.geometry.vertices.forEach(function (vertex, i) {
+            let offset = mesh.geometry.parameters.height;
+            let amp = 7;
+            let time = window.performance.now();
+            vertex.normalize();
+            let rf = 0.0001;
+            let distance = ((offset + bassFr * 2) + noise.noise3D((vertex.x + time * rf * 7) / 20, (vertex.y + time * rf * 8) / 2, (vertex.z + time * rf * 9) / 2) * amp * treFr);
+            vertex.multiplyScalar(Math.abs(distance / 10));
+        });
+    }
+
+
+//position.needsUpdate = true;
+    mesh.geometry.verticesNeedUpdate = true;
+    mesh.geometry.normalsNeedUpdate = true;
+    mesh.geometry.computeVertexNormals();
+    mesh.geometry.computeFaceNormals();
 
 }
 
+function distortSurface2D(mesh, bassFr, treFr) {
+
+    mesh.geometry.vertices.forEach(function (vertex, i) {
+        let offset = mesh.geometry.parameters.radius;
+        let amp = 7;
+        let time = window.performance.now();
+        vertex.normalize();
+        let rf = 0.0001;
+        let distance = ((offset + bassFr) + noise.noise2D((vertex.x + time * rf * 7) / 2, (vertex.y + time * rf * 8) / 2));
+        vertex.multiplyScalar(Math.abs(distance / 10));
+    });
+
+
+    //position.needsUpdate = true;
+    mesh.geometry.verticesNeedUpdate = true;
+    mesh.geometry.normalsNeedUpdate = true;
+    mesh.geometry.computeVertexNormals();
+    mesh.geometry.computeFaceNormals();
+
+}
 
 //some helper functions here
 function fractionate(val, minVal, maxVal) {
@@ -150,6 +202,7 @@ function max(arr) {
 function getAmountOfMaxValues(arr, _val) {
     return arr.filter(x => x >= _val).length;
 }
+
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
