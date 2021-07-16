@@ -1,8 +1,6 @@
 import {ARButton} from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
 
 
-
-
 //init();
 function init() {
     const container = document.createElement('div');
@@ -30,9 +28,6 @@ function init() {
     controller = renderer.xr.getController(0);
     controller.addEventListener('select', onSelect);
     scene.add(controller);
-
-
-
 
 
     document.body.appendChild(ARButton.createButton(renderer));
@@ -76,11 +71,14 @@ function render() {
     let upperMaxFr = upperMax / upperHalfArray.length;
     let upperAvgFr = upperAvg / upperHalfArray.length;
 
+    let flag = -1;
     for (let element of meshes) {
-        if(!element.doNotFlag) {
+        if (!element.doNotFlag) {
             element.rotation.y += -0.001;
             element.rotation.y += -0.0001 * getAmountOfMaxValues(lowerHalfArray, 200);
         }
+        element.rotation.z += -0.001 * flag;
+        //flag = flag * -1;
         distortSurface(element, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 7), modulate(upperAvgFr, 0, 1, 0, 3));
     }
     //meshes[0].material.color.setRGB(lowerMax, overallAvg,100)
@@ -111,13 +109,15 @@ function randomColor(lowerHalfArray, upperHalfArray, obj) {
     // todo change color according to color in use
     //let color4 = new THREE.Color("rgb(100%, 0%, 0%)");
 }
+
 function removeEntity(uuid) {
-    const object = scene.getObjectByProperty( 'uuid', uuid );
+    const object = scene.getObjectByProperty('uuid', uuid);
     object.geometry.dispose();
     object.material.dispose();
-    scene.remove( object );
+    scene.remove(object);
     renderer.renderLists.dispose();
     renderer.setAnimationLoop(null);
     renderer.setAnimationLoop(render);
 }
-export {init,removeEntity};
+
+export {init, removeEntity};
