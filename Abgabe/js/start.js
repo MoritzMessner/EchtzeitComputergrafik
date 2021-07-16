@@ -32,6 +32,7 @@ function switchStyle(style) {
     switch (style) {
         case 'mandala':
             mesh = makeMandala();
+            $("body").css("background", "#000000");
             break;
         case 'point-cloud':
             mesh = addPointCloudToScene();

@@ -178,6 +178,13 @@ function makeMandala() {
     scene.add(cone);
     meshes.push(cone)
     cone.translateZ(-6)
+    box = new THREE.TorusGeometry(50, 3, 16, 100);
+    material = new THREE.PointCloudMaterial({size: 2, sizeAttenuation: false, transparent: true, color: 0xffff00});
+    cone = new THREE.PointCloud(box, material);
+    cone.doNotFlag = true;
+    scene.add(cone);
+    meshes.push(cone)
+    cone.translateZ(-6)
 }
 
 function addPointCloudToScene() {
