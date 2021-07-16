@@ -77,8 +77,10 @@ function render() {
     let upperAvgFr = upperAvg / upperHalfArray.length;
 
     for (let element of meshes) {
-        element.rotation.y += -0.001;
-        element.rotation.y += -0.0001 * getAmountOfMaxValues(lowerHalfArray, 200);
+        if(!element.doNotFlag) {
+            element.rotation.y += -0.001;
+            element.rotation.y += -0.0001 * getAmountOfMaxValues(lowerHalfArray, 200);
+        }
         distortSurface(element, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 7), modulate(upperAvgFr, 0, 1, 0, 3));
     }
     //meshes[0].material.color.setRGB(lowerMax, overallAvg,100)
@@ -117,7 +119,5 @@ function removeEntity(uuid) {
     renderer.renderLists.dispose();
     renderer.setAnimationLoop(null);
     renderer.setAnimationLoop(render);
-
-
 }
 export {init,removeEntity};

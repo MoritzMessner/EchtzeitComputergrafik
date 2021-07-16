@@ -5,16 +5,16 @@ window.start = function start(style) {
         init();
     // Add Mesh
     switchStyle(style)
-    document.getElementById("audio").style.display = "";
+    //document.getElementById("audio").style.display = "";
     $("#body-wrapper").fadeOut("slow");
     play();
 }
 
 
 window.menu = function menu() {
-    document.getElementById("audio").style.display = "block";
+    //document.getElementById("audio").style.display = "block";
     $("#body-wrapper").fadeIn("slow");
-    $("#audio").fadeIn("slow");
+    //$("#audio").fadeIn("slow");
 }
 
 function switchStyle(style) {
@@ -23,19 +23,26 @@ function switchStyle(style) {
     //renderer.setAnimationLoop(null);        // pause the animation
 
     for (let i = scene.children.length - 1; i >= 0; i--) {
-        if (scene.children[i].type === "Mesh")
+        if (scene.children[i].type === "Mesh" || scene.children[i].type === "Points")
             scene.remove(scene.children[i]);
     }
     meshes = [];
     //renderer.renderLists.dispose();
 
     switch (style) {
+        case 'mandala':
+            mesh = makeMandala();
+            break;
+        case 'point-cloud':
+            mesh = addPointCloudToScene();
+            $("body").css("background", "black");
+            break;
         case 'cube-black-wireframe':
             mesh = addCubeToScene();
             console.log("In here")
             mesh.material.color.setRGB(0, 0, 0)
             $("body").css("background", "white");
-            break;
+
 
         case 'black-wireframe':
             mesh = addSphereToScene(true);

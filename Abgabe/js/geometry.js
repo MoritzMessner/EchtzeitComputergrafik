@@ -91,6 +91,19 @@ class Geometry {
         return ball;
     }
 
+    addPointCloud() {
+        let editGeometry = new THREE.IcosahedronGeometry(1, 20);
+        //let geometry = new THREE.Geometry();
+
+        let material = new THREE.PointCloudMaterial({size: 2, sizeAttenuation: false, transparent: true});
+        material.color.setHSL(1.0, 1, 1);
+
+        let particles = new THREE.PointCloud(editGeometry, material);
+        particles.sortParticles = true;
+        this.addToScene(particles);
+        return particles;
+    }
+
     simpleColor(_color = "white") {
         let colorValue = 0xfff;
         switch (_color) {
@@ -106,6 +119,7 @@ class Geometry {
 
     addToScene(_obj) {
         meshes.push(_obj);
+        console.log(_obj);
         scene.add(_obj);
     }
 
@@ -117,8 +131,58 @@ function addSphereToScene(_wireframe = false) {
 }
 
 function addCubeToScene(_wireframe = false) {
-    let box = new Geometry();
-    return box.addBoxGeometry(3,3,3,30,30,30).translateZ(-6);
+    //let box = new Geometry();
+    let box = new THREE.TorusGeometry(10, 3, 16, 100);
+    let material = new THREE.PointCloudMaterial({size: 2, sizeAttenuation: false, transparent: true});
+    const cone = new THREE.PointCloud(box, material);
+    cone.doNotFlag = true;
+    scene.add(cone);
+    meshes.push(cone)
+    return cone.translateZ(-6);
+}
+
+function makeMandala() {
+    let box = new THREE.TorusGeometry(1, 3, 16, 100);
+    let material = new THREE.PointCloudMaterial({size: 2, sizeAttenuation: false, transparent: true, color: 0xffffff});
+    let cone = new THREE.PointCloud(box, material);
+    cone.doNotFlag = true;
+    scene.add(cone);
+    meshes.push(cone)
+    cone.translateZ(-6)
+
+    box = new THREE.TorusGeometry(10, 3, 16, 100);
+    material = new THREE.PointCloudMaterial({size: 2, sizeAttenuation: false, transparent: true, color: 0x00ffff});
+    cone = new THREE.PointCloud(box, material);
+    cone.doNotFlag = true;
+    scene.add(cone);
+    meshes.push(cone)
+    cone.translateZ(-6)
+    box = new THREE.TorusGeometry(20, 3, 16, 100);
+    material = new THREE.PointCloudMaterial({size: 2, sizeAttenuation: false, transparent: true, color: 0x0000ff});
+    cone = new THREE.PointCloud(box, material);
+    cone.doNotFlag = true;
+    scene.add(cone);
+    meshes.push(cone)
+    cone.translateZ(-6)
+    box = new THREE.TorusGeometry(30, 3, 16, 100);
+    material = new THREE.PointCloudMaterial({size: 2, sizeAttenuation: false, transparent: true, color: 0xff0000});
+    cone = new THREE.PointCloud(box, material);
+    cone.doNotFlag = true;
+    scene.add(cone);
+    meshes.push(cone)
+    cone.translateZ(-6)
+    box = new THREE.TorusGeometry(40, 3, 16, 100);
+    material = new THREE.PointCloudMaterial({size: 2, sizeAttenuation: false, transparent: true, color: 0x00ff00});
+    cone = new THREE.PointCloud(box, material);
+    cone.doNotFlag = true;
+    scene.add(cone);
+    meshes.push(cone)
+    cone.translateZ(-6)
+}
+
+function addPointCloudToScene() {
+    let pointCloud = new Geometry();
+    return pointCloud.addPointCloud().translateZ(-6);
 }
 
 function distortSurface(mesh, bassFr, treFr) {
@@ -135,7 +199,7 @@ function distortSurface(mesh, bassFr, treFr) {
         });
     } else {
         mesh.geometry.vertices.forEach(function (vertex, i) {
-            let offset = mesh.geometry.parameters.height;
+            let offset = mesh.geometry.parameters.radius;
             let amp = 7;
             let time = window.performance.now();
             vertex.normalize();
