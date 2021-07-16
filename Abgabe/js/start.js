@@ -44,7 +44,6 @@ function switchStyle(style) {
             mesh.material.color.setRGB(0, 0, 0)
             $("body").css("background", "white");
 
-
         case 'black-wireframe':
             mesh = addSphereToScene(true);
             mesh.material.color.setRGB(0, 0, 0)
