@@ -1,4 +1,6 @@
-import {init, removeEntity} from "./main.js";
+import {init} from "./main.js";
+import {Audio} from "./systems/Audio.js";
+
 
 window.start = function start(style) {
     if (!scene)
@@ -7,7 +9,7 @@ window.start = function start(style) {
     switchStyle(style)
     //document.getElementById("audio").style.display = "";
     $("#body-wrapper").fadeOut("slow");
-    play();
+    Audio.play();
 }
 
 
@@ -22,11 +24,11 @@ function switchStyle(style) {
     let meshTwo;
     //renderer.setAnimationLoop(null);        // pause the animation
 
-    for (let i = scene.children.length - 1; i >= 0; i--) {
-        if (scene.children[i].type === "Mesh" || scene.children[i].type === "Points")
-            scene.remove(scene.children[i]);
+    for (let i = scene.getChildren().length - 1; i >= 0; i--) {
+        if (scene.getChild(i).type === "Mesh" || scene.getChild(i).type === "Points")
+            scene.remove(scene.getChild(i));
     }
-    meshes = [];
+    scene.setMeshes([]);
     //renderer.renderLists.dispose();
 
     switch (style) {

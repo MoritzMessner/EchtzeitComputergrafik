@@ -5,17 +5,18 @@
     <title>Moritz Messner</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="author" content="WPM - Echtzeit Computergrafik">
+    <meta name="author" content="Moritz Messner - Echtzeit Computergrafik">
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.3.0/simplex-noise.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="js/geometry.js" defer></script>
-    <script src="js/fft.js" defer></script>
+    <script src="js/components/geometry.js" defer></script>
     <script type="module" src="js/main.js"></script>
-    <script src="js/movement.js" defer></script>
+    <script src="js/systems/functions.js" defer></script>
+    <script src="js/systems/Audio.js" type="module" defer></script>
     <script src="js/start.js" type="module" defer></script>
+    <script src="js/components/Scene.js" type="module" defer></script>
 </head>
 
 <body>
@@ -31,26 +32,12 @@
         <div class="flex-item" onclick="window.start('point-cloud')">point-cloud</div>
         <div class="flex-item" onclick="window.start('cube-black-wireframe')">cube</div>
         <div class="flex-item" onclick="window.start('mandala')">mandala</div>
-
     </div>
-
 </div>
 
 <script>
-    var meshes = [];
     var camera, scene, renderer;
     var controller;
-    var dataArray;
-    var canvas,
-        source,
-        context,
-        analyser,
-        fbc_array,
-        bar_count,
-        bar_pos,
-        bar_height,
-        audio,
-        ball;
 
 
 </script>
