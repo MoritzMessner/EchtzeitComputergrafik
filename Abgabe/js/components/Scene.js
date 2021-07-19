@@ -29,9 +29,10 @@ class Scene {
     addToScene(_obj) {
         this.scene.add(_obj);
         this.pushMesh(_obj);
+        console.log(_obj);
     }
 
-    removeFromSceneByUUID(_obj) {
+    removeFromSceneByUUID(uuid) {
         const object = scene.getObjectByProperty('uuid', uuid);
         object.geometry.dispose();
         object.material.dispose();
@@ -48,6 +49,14 @@ class Scene {
 
     remove(_obj) {
         this.scene.remove(_obj);
+    }
+
+    removeAllMeshes() {
+        for (let i = this.getChildren().length - 1; i >= 0; i--) {
+            if (this.getChild(i).type === "Mesh" || this.getChild(i).type === "Points")
+                this.remove(scene.getChild(i));
+        }
+        this.setMeshes([]);
     }
 }
 

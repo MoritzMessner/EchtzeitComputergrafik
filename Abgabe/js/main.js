@@ -1,6 +1,7 @@
 import {ARButton} from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
 import {Scene} from "./components/Scene.js";
 import {Audio} from "./systems/Audio.js";
+import {Geometry} from "./components/Geometry.js";
 
 function init() {
     const container = document.createElement('div');
@@ -73,10 +74,8 @@ function render() {
 
     let flag = -1;
     for (let element of scene.getMeshes()) {
-
         element.rotation.z += -0.001 * getAmountOfMaxValues(lowerHalfArray, 200) * flag;
-        //flag = flag * -1;
-        distortSurface(element, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 7), modulate(upperAvgFr, 0, 1, 0, 3));
+        Geometry.distortSurface(element, modulate(Math.pow(lowerMaxFr, 0.8), 0, 1, 0, 7), modulate(upperAvgFr, 0, 1, 0, 3));
     }
 
 }
