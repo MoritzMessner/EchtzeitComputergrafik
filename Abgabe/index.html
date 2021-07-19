@@ -13,6 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="module" src="js/main.js"></script>
     <script src="js/systems/functions.js" defer></script>
+    <script src="js/systems/OrbitControls.js" defer></script>
     <script src="js/systems/Audio.js" type="module" defer></script>
     <script src="js/systems/start.js" type="module" defer></script>
     <script src="js/components/Scene.js" type="module" defer></script>
@@ -36,7 +37,7 @@
 </div>
 
 <script>
-    var camera, scene, renderer, controller;
+    var camera, scene, renderer, controller, controls;
 
 
 </script>
@@ -45,7 +46,8 @@
     <div class="bar1"></div>
     <div class="bar2"></div>
     <div class="bar3"></div>
-</div>-->
+</div>
+-->
 <button onclick="window.menu()">BackToMenu</button>
 <input type="file" id="upload"/>
 <audio id="audio" controls>
@@ -53,7 +55,6 @@
 </audio>
 
 
-<audio-player id="audio" data-src="https://assets.codepen.io/4358584/Anitek_-_Komorebi.mp3"></audio-player>
 <script>
     function myFunction(x) {
         x.classList.toggle("change");

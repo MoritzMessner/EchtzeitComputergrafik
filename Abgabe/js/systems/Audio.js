@@ -20,12 +20,12 @@ class Audio {
         this.audio = document.getElementById("audio");
         let context = new AudioContext();
         let src = context.createMediaElementSource(this.audio);
-        this.analyser = context.createAnalyser();
+        this.setAnalyser(context.createAnalyser());
         src.connect(this.analyser);
         this.analyser.connect(context.destination);
         this.analyser.fftSize = 512;
         let bufferLength = this.analyser.frequencyBinCount;
-        this.dataArray = new Uint8Array(bufferLength);
+        this.setDataArray(new Uint8Array(bufferLength));
     }
 
     static pause() {

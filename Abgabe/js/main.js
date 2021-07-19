@@ -2,6 +2,7 @@ import {ARButton} from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARBut
 import {Scene} from "./components/Scene.js";
 import {Audio} from "./systems/Audio.js";
 import {Geometry} from "./components/Geometry.js";
+import {Renderer} from "./components/Renderer.js";
 
 function init() {
     const container = document.createElement('div');
@@ -10,28 +11,30 @@ function init() {
     scene = new Scene();
 
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 60);
-
+    camera.lookAt(0, 0, -6);
     // enable and setup Renderer
-    renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.xr.enabled = true; // Wir müssen den Renderer für WebXR aktivieren
-    container.appendChild(renderer.domElement);
+    renderer = new Renderer();
+    renderer.setPixelRatio();
+    renderer.setSize();
+    renderer.xr(true);
+    container.appendChild(renderer.getRenderer().domElement);
 
     // Add light
     let light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
     light.position.set(0.5, 1, 0.25);
 
     // Add XR Buttons
-    controller = renderer.xr.getController(0);
-    //scene.add(controller);
-
+    controller = renderer.getRenderer().xr.getController(0);
     scene.addToScene(light)
     scene.addToScene(controller)
 
-    document.body.appendChild(ARButton.createButton(renderer));
+    document.body.appendChild(ARButton.createButton(renderer.getRenderer()));
     window.addEventListener('resize', onWindowResize, false);
     controller.addEventListener('select', onSelect);
+
+
+    controls = new THREE.OrbitControls( camera, renderer.getRenderer().domElement );
+
 
     // start the audio
     Audio.init();
@@ -41,6 +44,7 @@ function init() {
 
 function onSelect() {
     //Todo
+
 }
 
 function onWindowResize() {
@@ -50,11 +54,12 @@ function onWindowResize() {
 }
 
 function animate() {
-    renderer.setAnimationLoop(render);
+    renderer.getRenderer().setAnimationLoop(render);
 }
 
 function render() {
-    renderer.render(scene.getScene(), camera);
+    controls.update();
+    renderer.getRenderer().render(scene.getScene(), camera);
 
     Audio.getAnalyser().getByteFrequencyData(Audio.getDataArray());
 
