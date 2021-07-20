@@ -41,30 +41,25 @@
 
 
 </script>
-<!--
-<div class="container" onclick="myFunction(this)">
-    <div class="bar1"></div>
-    <div class="bar2"></div>
-    <div class="bar3"></div>
+
+<div id="menu-wrapper">
+    <div class="container change" id="menu" onclick="myFunction(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </div>
+    <div>
+        <input type="file" name="upload" id="upload" accept=".mp3,audio/*"/>
+        <label id="upload-label" for="upload">Choose a music file</label>
+    </div>
 </div>
--->
-<button onclick="window.menu()">BackToMenu</button>
-<input type="file" id="upload"/>
-<audio id="audio" controls>
-    <source src="audio/Maitre_Gims_-_Est-ce_que_tu_maimes__.mp3" id="src"/>
-</audio>
+
+    <audio id="audio" controls>
+        <source src="audio/Maitre_Gims_-_Est-ce_que_tu_maimes__.mp3" id="src"/>
+    </audio>
+<!--<button onclick="window.menu()">BackToMenu</button>-->
 
 
-<script>
-    function myFunction(x) {
-        x.classList.toggle("change");
-        if (x.classList.contains("change"))
-            $("#body-wrapper").fadeIn("slow");
-        else
-            $("#body-wrapper").fadeOut("slow");
-
-    }
-</script>
 </body>
 
 </html>

@@ -9,6 +9,7 @@ window.start = function start(style) {
     switchStyle(style)
     $("#body-wrapper").fadeOut("slow");
     Audio.play();
+    myFunction(document.getElementById("menu"));
 }
 
 

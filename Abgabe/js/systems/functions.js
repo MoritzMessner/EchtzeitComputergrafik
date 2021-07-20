@@ -30,6 +30,15 @@ function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
 
+// menu
+function myFunction(x) {
+    x.classList.toggle("change");
+    if (x.classList.contains("change"))
+        $("#body-wrapper").fadeIn("slow");
+    else
+        $("#body-wrapper").fadeOut("slow");
+}
+
 // Audio
 function handleFiles(event) {
     var files = event.target.files;

@@ -1,4 +1,4 @@
-var noise = new SimplexNoise();
+const noise = new SimplexNoise();
 
 
 class Geometry {
@@ -18,7 +18,7 @@ class Geometry {
     }
 
     static addTorusKnot() {
-        let icosahedronGeometry = new THREE.TorusKnotGeometry(10, 5, 40, 8,7,1,3);
+        let icosahedronGeometry = new THREE.TorusKnotGeometry(10, 5, 40, 8, 7, 1, 3);
         icosahedronGeometry.dynamic = true;
         let lambertMaterial = new THREE.MeshLambertMaterial({
             color: 0xffffff,
@@ -63,7 +63,7 @@ class Geometry {
     }
 
     static distortSurface(mesh, bassFr, treFr) {
-        mesh.geometry.vertices.forEach(function (vertex, i) {
+        mesh.geometry.vertices.forEach(function (vertex) {
             let offset = mesh.geometry.parameters.radius;
             let amp = 7;
             let time = window.performance.now();
@@ -74,8 +74,6 @@ class Geometry {
         });
         mesh.geometry.verticesNeedUpdate = true;
         mesh.geometry.normalsNeedUpdate = true;
-        mesh.geometry.computeVertexNormals();
-        mesh.geometry.computeFaceNormals();
     }
 }
 
