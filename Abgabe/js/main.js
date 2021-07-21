@@ -33,7 +33,7 @@ function init() {
     controller.addEventListener('select', onSelect);
 
 
-    controls = new THREE.OrbitControls( camera, renderer.getRenderer().domElement );
+    controls = new THREE.OrbitControls(camera, renderer.getRenderer().domElement);
 
 
     // start the audio
