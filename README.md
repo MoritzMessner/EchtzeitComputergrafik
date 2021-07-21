@@ -75,4 +75,7 @@ werden soll und welche Hintergrundfarbe verwendet werden soll.
 ![black-white](Abgabe/images/black_white_01.jpg)
 ![white-wireframe](Abgabe/images/white-wireframe.jpg)
 ![red-blue](Abgabe/images/red-blue.jpg)
-![Demo-AR](Abgabe/images/demo.gif)
+
+<p align="center">
+  <img src="Abgabe/images/demo.gif" />
+</p>
