@@ -1,4 +1,4 @@
-# EchtzeitComputergrafik
+# Echtzeit Computergrafik Grundlagen
 
 Repository für das Wahlpflichtmodul Echtzeitcomputergrafik an der Hochschule Furtwangen
 
