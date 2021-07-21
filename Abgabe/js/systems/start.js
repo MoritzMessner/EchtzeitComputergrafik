@@ -62,7 +62,19 @@ function switchStyle(style) {
             bgColor = __ret.bgColor;
             break;
     }
+    nightMode(bgColor);
     $("body").css("background", bgColor);
+}
+
+function nightMode(mode) {
+    let elements = (".flex-item");
+    if (mode === "white") {
+        $(elements).addClass("night");
+        $("#fps_counter-wrapper").addClass("night")
+    } else {
+        $(elements).removeClass("night");
+        $("#fps_counter-wrapper").removeClass("night")
+    }
 }
 
 function torusKnotWhite(mesh, bgColor) {

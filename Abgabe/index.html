@@ -10,7 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.3.0/simplex-noise.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/main.js"defer></script>
+    <script type="module" src="js/systems/utilities.js"defer></script>
     <script src="js/systems/functions.js" defer></script>
     <script src="js/systems/OrbitControls.js" defer></script>
     <script src="js/systems/Audio.js" type="module" defer></script>
@@ -26,19 +27,22 @@
         <div class="flex-item" onclick="window.start('white-black')">white-black</div>
         <div class="flex-item" onclick="window.start('white-wireframe')">white-wireframe</div>
         <div class="flex-item" onclick="window.start('black-wireframe')">black-wireframe</div>
-        <div class="flex-item" onclick="window.start('blue-red-wireframe')">blue-red-wireframe</div>
-        <div class="flex-item" onclick="window.start('red-blue-wireframe')">red-blue-wireframe</div>
-        <div class="flex-item" onclick="window.start('cube-black-wireframe')">cube-black-wireframe</div>
+        <div class="flex-item" onclick="window.start('blue-red-wireframe')">blue-red</div>
+        <div class="flex-item" onclick="window.start('red-blue-wireframe')">red-blue</div>
+        <div class="flex-item" onclick="window.start('cube-black-wireframe')">halo sphere</div>
         <div class="flex-item" onclick="window.start('point-cloud')">point-cloud</div>
-        <div class="flex-item" onclick="window.start('torus-knot-white')">torus-knot-white</div>
+        <!-- <div class="flex-item" onclick="window.start('torus-knot-white')">torus-knot-white</div>-->
         <div class="flex-item" onclick="window.start('mandala')">mandala</div>
     </div>
+
+    <audio id="audio" controls>
+        <source src="audio/Maitre_Gims_-_Est-ce_que_tu_maimes__.mp3" id="src"/>
+    </audio>
 </div>
+<div id="fps_counter-wrapper">FPS:<span id="fps_counter"></span></div>
 
 <script>
     var camera, scene, renderer, controller, controls;
-
-
 </script>
 
 <div id="menu-wrapper">
@@ -53,9 +57,7 @@
     </div>
 </div>
 
-    <audio id="audio" controls>
-        <source src="audio/Maitre_Gims_-_Est-ce_que_tu_maimes__.mp3" id="src"/>
-    </audio>
+
 <!--<button onclick="window.menu()">BackToMenu</button>-->
 
 

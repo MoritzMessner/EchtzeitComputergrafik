@@ -33,10 +33,11 @@ function getRandomArbitrary(min, max) {
 // menu
 function myFunction(x) {
     x.classList.toggle("change");
-    if (x.classList.contains("change"))
+    if (x.classList.contains("change")) {
         $("#body-wrapper").fadeIn("slow");
-    else
+    } else {
         $("#body-wrapper").fadeOut("slow");
+    }
 }
 
 // Audio
@@ -44,6 +45,7 @@ function handleFiles(event) {
     var files = event.target.files;
     $("#src").attr("src", URL.createObjectURL(files[0]));
     document.getElementById("audio").load();
+    document.getElementById("audio").play();
 }
 
 document.getElementById("upload").addEventListener("change", handleFiles, false);
