@@ -124,7 +124,7 @@ body {
 #fps_counter-wrapper {
     position: absolute;
     right: 10px;
-    top: 10px;
+    top: 24px;
     color: #8d8d8d;
     background-color: transparent !important;
 }
