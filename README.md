@@ -2,6 +2,7 @@
 
 Repository für das Wahlpflichtmodul Echtzeitcomputergrafik an der Hochschule Furtwangen
 
+![Preview Bild von Visualizer](Abgabe/images/black_white_01.jpg)
 ---
 Anbei eine kurze Erläuterung zu der Abschlussabgabe für dieses Modul.
 
