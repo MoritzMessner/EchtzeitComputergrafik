@@ -13,6 +13,7 @@ Anbei eine kurze Erläuterung zu der Abschlussabgabe für dieses Modul.
 - [simplex-noise.js](https://github.com/jwagner/simplex-noise.js)
 
 ---
+![point-cloud](Abgabe/images/mandala.jpg)
 
 ## Klasse Audio
 
@@ -33,19 +34,25 @@ die initialisierung von Werten verwendet werden.
 
 ---
 
+![point-cloud](Abgabe/images/pointcloud.jpg)
+
 ## Klasse Geometrie
 
 Ähnlich wie bei dem Audio, habe ich für Geometrie eine Schnittstelle entworfen. Hierbei sind auch alle Methoden wieder
 statisch. Alle Methoden in der Klasse "Geometry" sind kleine Hilfsfunktionen welche den Umgang mit verschiedener
 Geometrie erleichtern. Mithilfe dieser Funktionen wird verschiedenste Geometrie erzeugt oder manipuliert. Man kann
-Punktwolken, Wireframes und ein Mandala generieren. Auch befindet sich hier die Methode welche für die manipulation der
-einzelnen "vertecies" zuständig ist. Hierfür iteriere ich in dieser Methode über jeden Vertex eines Meshes welches per
-Referenz an diese Methode übergeben wird und manipuliere dessen Position. Mithilfe
-von [simplex-noise.js](https://github.com/jwagner/simplex-noise.js) werden neue Positionen für die Vertices erechnet und
-diese dann verschoben. Nun muss dem "renderer" noch mitgeteilt werden, dass die Vertices Positionen neu bestimmt wurden
-und dieser diese bitter updaten soll. Genau das gleiche muss auch für die Normalen gemacht werden.
+Punktwolken, Wireframes und ein Mandala generieren.
+
+Auch befindet sich hier die Methode welche für die manipulation der einzelnen "vertecies" zuständig ist. Hierfür
+iteriere ich in dieser Methode über jeden Vertex eines Meshes welches per Referenz an diese Methode übergeben wird und
+manipuliere dessen Position. Mithilfe von [simplex-noise.js](https://github.com/jwagner/simplex-noise.js) werden neue
+Positionen für die Vertices erechnet und diese dann verschoben. Nun muss dem "renderer" noch mitgeteilt werden, dass die
+Vertices Positionen neu bestimmt wurden und dieser diese bitter updaten soll. Genau das gleiche muss auch für die
+Normalen gemacht werden.
 
 ---
+
+![black-wireframe](Abgabe/images/black-wireframe.jpg)
 
 ## start.js
 
@@ -54,3 +61,10 @@ der Datei ```index.html``` die Funktion ```window.start``` aufgerufen. Diese Fun
 Parameter ```style: string``` welcher den textlichen Style enthält. Dieser Style wird dann an die Funktion
 ````switchStyle```` weiter delegiert. Diese Funktion bestimmt anhand des übergebenen Strings was in der Szene gezeigt
 werden soll und welche Hintergrundfarbe verwendet werden soll.
+
+---
+
+## Styles
+
+![black-white](Abgabe/images/black_white_01.jpg)
+![white-wireframe](Abgabe/images/white-wireframe.jpg)
