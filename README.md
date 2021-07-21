@@ -5,6 +5,11 @@ Repository für das Wahlpflichtmodul Echtzeitcomputergrafik an der Hochschule Fu
 ![Preview Bild von Visualizer](Abgabe/images/white-black.jpg)
 
 ---
+Ziel dieses Projektes war es einen Audio-Visualizer zu entwickeln, welcher sowhol als Webanwenung und als AR-Anwendung
+funktioniert. Hierbei sollte auch die Möglichkeit, seine eigenen Audiodateien zu verwenden, gegeben sein. 
+
+Demo: [Visualizer](https://moritzmessner.github.io/EchtzeitComputergrafik/Abgabe/)
+
 Anbei eine kurze Erläuterung zu der Abschlussabgabe für dieses Modul.
 
 ## Technologien
