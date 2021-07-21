@@ -13,7 +13,7 @@ Anbei eine kurze Erläuterung zu der Abschlussabgabe für dieses Modul.
 
 ---
 
-## Audio
+## Klasse Audio
 
 Um in meinem Projekt die Audiodateien Live zu analysieren habe ich das
 Interface [AudioContext](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext) verwendet. Mithilfe dieses
@@ -32,7 +32,7 @@ die initialisierung von Werten verwendet werden.
 
 ---
 
-## Geometrie
+## Klasse Geometrie
 
 Ähnlich wie bei dem Audio, habe ich für Geometrie eine Schnittstelle entworfen. Hierbei sind auch alle Methoden wieder
 statisch. Alle Methoden in der Klasse "Geometry" sind kleine Hilfsfunktionen welche den Umgang mit verschiedener
@@ -43,3 +43,13 @@ Referenz an diese Methode übergeben wird und manipuliere dessen Position. Mithi
 von [simplex-noise.js](https://github.com/jwagner/simplex-noise.js) werden neue Positionen für die Vertices erechnet und
 diese dann verschoben. Nun muss dem "renderer" noch mitgeteilt werden, dass die Vertices Positionen neu bestimmt wurden
 und dieser diese bitter updaten soll. Genau das gleiche muss auch für die Normalen gemacht werden.
+
+---
+
+## start.js
+
+In diesem Javascript-File wird bestimmt welcher Style und welches Mesh in die Szene hinzugefügt wird. Hierbei wird aus
+der Datei ```index.html``` die Funktion ```window.start``` aufgerufen. Diese Funktion erhält einen den
+Parameter ```style: string``` welcher den textlichen Style enthält. Dieser Style wird dann an die Funktion
+````switchStyle```` weiter delegiert. Diese Funktion bestimmt anhand des übergebenen Strings was in der Szene gezeigt
+werden soll und welche Hintergrundfarbe verwendet werden soll.
